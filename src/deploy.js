@@ -1,48 +1,24 @@
-const { Client, GatewayIntentBits } = require("discord.js");
-const { token, clientId, guildId } = require("./config");
+const { REST } = require("@discordjs/rest");
+const { Routes } = require("discord-api-types/v9");
+const { clientId, guildId, token } = require("./config");
+const fs = require("node:fs");
+const path = require("node:path");
+const commands = [];
+const commandsPath = path.join(__dirname, "commands");
+const commandFiles = fs
+  .readdirSync(commandsPath)
+  .filter((file) => file.endsWith(".js"));
 
-const client = new Client({ intents: [GatewayIntentBits.Guilds] });
-console.log(token, guildId);
-client.once("ready", async () => {
-  console.log("Bot is ready! deploy");
+for (const file of commandFiles) {
+  const filePath = path.join(commandsPath, file);
+  const command = require(filePath);
+  console.log(require(filePath));
+  commands.push(command.data.toJSON());
+}
 
-  const commands = [
-    {
-      name: "plant",
-      description: "Plant seeds on your farm.",
-    },
-    {
-      name: "harvest",
-      description: "Harvest crops from your farm.",
-    },
-    {
-      name: "cook",
-      description: "Cook dishes using your harvested crops.",
-    },
-    {
-      name: "start",
-      description: "Start the farming game.",
-    },
-    {
-      name: "end",
-      description: "End the farming game.",
-    },
-  ];
+const rest = new REST({ version: "9" }).setToken(token);
 
-  try {
-    const guild = await client.guilds.fetch(guildId);
-    const commandManager = guild.commands;
-
-    // Clear existing commands
-    await commandManager.set([]);
-
-    // Deploy new commands
-    const deployedCommands = await commandManager.set(commands);
-    console.log(`Deployed ${deployedCommands.size} commands:`);
-    deployedCommands.forEach((command) => console.log(`- ${command.name}`));
-  } catch (error) {
-    console.error("Error deploying commands:", error);
-  }
-});
-
-client.login(token);
+rest
+  .put(Routes.applicationGuildCommands(clientId, guildId), { body: commands })
+  .then(() => console.log("Successfully registered application commands."))
+  .catch(console.error);
