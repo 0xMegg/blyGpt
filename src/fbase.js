@@ -8,17 +8,19 @@ const {
   Timestamp,
   FieldValue,
 } = require("firebase-admin/firestore");
+const { getStorage } = require("firebase-admin/storage");
 
-const serviceAccount = require("../fir-study-1c95a-firebase-adminsdk-h3vo2-60d70387a2.json");
+const serviceAccount = require("../fireConfig.json");
 
 initializeApp({
   credential: cert(serviceAccount),
 });
 
 const db = getFirestore();
-
+const storage = getStorage();
 module.exports = {
   db,
+  storage,
 };
 
 // db.collection("users")
