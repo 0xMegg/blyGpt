@@ -17,10 +17,10 @@ initializeApp({
 });
 
 const db = getFirestore();
-const storage = getStorage();
+// const storage = getStorage();
 module.exports = {
   db,
-  storage,
+  // storage,
 };
 
 // db.collection("users")

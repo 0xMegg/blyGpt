@@ -14,10 +14,12 @@
   "dependencies": {
     "@discordjs/rest": "^1.0.1",
     "discord.js": "^14.1.2",
+    "discord.js-pagination": "^1.0.3",
     "dotenv": "^16.0.2",
     "firebase": "^9.22.0",
     "firebase-admin": "^11.8.0",
     "fs": "^0.0.1-security",
-    "nodemon": "^2.0.22"
+    "nodemon": "^2.0.22",
+    "pagination.djs": "^4.0.9"
   }
 }

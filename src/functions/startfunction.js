@@ -1,5 +1,11 @@
 const { db, storage } = require("../fbase");
-const { EmbedBuilder } = require("discord.js");
+const {
+  EmbedBuilder,
+  ButtonStyle,
+  ButtonBuilder,
+  ActionRowBuilder,
+} = require("discord.js");
+const { Pagination, ExtraRowPosition } = require("pagination.djs");
 
 async function startfunction(interaction) {
   const userDocRef = db.collection("users").doc(interaction.user.id);
@@ -37,14 +43,58 @@ async function startfunction(interaction) {
     gold: 0,
   });
 
-  // Return a greeting message for the new user
-  const imageUrl =
-    "https://images.unsplash.com/photo-1575936123452-b67c3203c357?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8aW1hZ2V8ZW58MHx8MHx8fDA%3D&w=1000&q=80";
+  const imageUrl1 =
+    "https://firebasestorage.googleapis.com/v0/b/fir-study-1c95a.appspot.com/o/Q_80%2C0.jpeg?alt=media&token=9c015d0e-158e-4d8a-9705-5d3800ee7369";
+  const imageUrl2 =
+    "https://firebasestorage.googleapis.com/v0/b/fir-study-1c95a.appspot.com/o/NewJeans_theMEGASTUDY.jpg?alt=media&token=fc752bb8-6689-43df-a2d5-01a5bbc1a625";
+  const imageUrl3 =
+    "https://firebasestorage.googleapis.com/v0/b/fir-study-1c95a.appspot.com/o/maxresdefault.jpg?alt=media&token=c781148d-93d7-454b-9e7e-24a7031998a2";
   // Create a new embed
-  const embed = new EmbedBuilder().setTitle("Welcome").setImage(imageUrl);
+  const embed1 = new EmbedBuilder()
+    .setTitle("Welcome1")
+    .setThumbnail(imageUrl1)
+    .setDescription("첫 설명")
+    .addFields({
+      name: "빌리야에 온걸 환영해",
+      value: "빌리야는 어쩌구 저쩌구",
+    });
+  const embed2 = new EmbedBuilder()
+    .setTitle("Welcome2")
+    .setThumbnail(imageUrl2)
+    .setDescription("너의 정보는 어쩌구 저쩌구");
+  const embed3 = new EmbedBuilder()
+    .setTitle("Welcome3")
+    .setThumbnail(imageUrl3)
+    .setDescription("셋 설명");
+  const embeds = [embed1, embed2, embed3];
 
-  // Send the embed
-  interaction.reply({ embeds: [embed] });
+  const pagination = new Pagination(interaction);
+  pagination.setButtonAppearance({
+    first: {
+      label: "처음으로",
+      emoji: "",
+      style: ButtonStyle.PRIMARY,
+    },
+    prev: {
+      label: "",
+      emoji: "◀️",
+      style: ButtonStyle.SECONDARY,
+    },
+    next: {
+      label: "",
+      emoji: "▶️",
+      style: ButtonStyle.SUCCESS,
+    },
+    last: {
+      label: "마지막으로",
+      emoji: "",
+      style: ButtonStyle.DANGER,
+    },
+  });
+
+  pagination.setEmbeds(embeds);
+  pagination.render();
+
   // }
 }
 
