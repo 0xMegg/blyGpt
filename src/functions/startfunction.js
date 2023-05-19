@@ -53,7 +53,7 @@ async function startfunction(interaction) {
   const embed1 = new EmbedBuilder()
     .setTitle("Welcome1")
     .setThumbnail(imageUrl1)
-    .setDescription("첫 설명")
+    .setDescription("상세설명")
     .addFields({
       name: "빌리야에 온걸 환영해",
       value: "빌리야는 어쩌구 저쩌구",
@@ -65,7 +65,11 @@ async function startfunction(interaction) {
   const embed3 = new EmbedBuilder()
     .setTitle("Welcome3")
     .setThumbnail(imageUrl3)
-    .setDescription("셋 설명");
+    .setDescription("가입");
+  // .addFields({
+  //   name: "",
+  //   value: "[클릭](http://www.google.com)",
+  // });
   const embeds = [embed1, embed2, embed3];
 
   const pagination = new Pagination(interaction);
