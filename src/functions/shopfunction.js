@@ -28,7 +28,7 @@ async function startfunction(interaction) {
   console.log(typeof data1);
   console.log(data1);
 
-  interaction.channel.send({ embeds: [embed1], components: [row] });
+  interaction.reply({ embeds: [embed1], components: [row] });
 }
 
 module.exports = startfunction;
