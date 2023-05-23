@@ -4,8 +4,8 @@ const {
   ButtonStyle,
   ButtonBuilder,
   ActionRowBuilder,
+  ComponentType,
 } = require("discord.js");
-const { Pagination, ExtraRowPosition } = require("pagination.djs");
 
 async function startfunction(interaction) {
   const imageUrl1 =
@@ -20,13 +20,37 @@ async function startfunction(interaction) {
     new ButtonBuilder().setCustomId("item4").setLabel("Item 4").setStyle(1)
   );
 
-  let data1 = "not changed";
+  const collector = interaction.channel.createMessageComponentCollector({
+    componentType: ComponentType.Button,
+    time: 60000,
+  });
 
-  const docRef = db.collection("users").doc("1016972120330358807");
-  const doc = await docRef.get();
-  data1 = doc.data().exp;
-  console.log(typeof data1);
-  console.log(data1);
+  collector.on("collect", (i) => {
+    if (i.user.id === interaction.user.id) {
+      i.reply(`${i.user.id} clicked on the ${i.customId} button.`);
+      switch (i.customId) {
+        case "item1":
+          interaction.channel.send("purchased");
+          break;
+        default:
+          interaction.channel.send("not item1");
+          break;
+      }
+    } else {
+      i.reply({ content: `These buttons aren't for you!`, ephemeral: true });
+    }
+  });
+
+  collector.on("end", (collected) => {
+    console.log(`Collected ${collected.size} interactions.`);
+  });
+  // let data1 = "not changed";
+
+  // const docRef = db.collection("users").doc("1016972120330358807");
+  // const doc = await docRef.get();
+  // data1 = doc.data().exp;
+  // console.log(typeof data1);
+  // console.log(data1);
 
   interaction.reply({ embeds: [embed1], components: [row] });
 }

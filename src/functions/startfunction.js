@@ -8,35 +8,17 @@ const {
 const { Pagination, ExtraRowPosition } = require("pagination.djs");
 
 async function startfunction(interaction) {
-  const userDocRef = db.collection("users").doc(interaction.user.id);
-
-  // Try to get the user's document
-  const doc = await userDocRef.get();
+  const userDoc = db.collection("users").doc(interaction.user.id);
+  const farmDoc = userDoc.collection("farm").doc();
+  const inventoryDoc = userDoc.collection("inventory").doc();
 
   // If it exists, return a message
   // if (doc.exists) {
   //   interaction.reply("u r already here");
   // } else {
-  // Get the current index from the database
-  const indexDocRef = db.collection("meta").doc("index");
-  let indexDoc = await indexDocRef.get();
-  let currentIndex;
-
-  if (!indexDoc.exists) {
-    currentIndex = 0; // Set initial value if it doesn't exist
-    await indexDocRef.set({ currentIndex: currentIndex });
-  } else {
-    currentIndex = indexDoc.data().currentIndex;
-  }
-
-  // Increment the index for the next user
-  await indexDocRef.update({
-    currentIndex: currentIndex + 1,
-  });
 
   // Set the user's data with the new index
-  await userDocRef.set({
-    index: currentIndex,
+  await userDoc.set({
     discordId: interaction.user.id,
     lastLogin: new Date(),
     exp: 0,
