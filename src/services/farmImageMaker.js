@@ -10,17 +10,7 @@ const {
 const { Pagination, ExtraRowPosition } = require("pagination.djs");
 const Canvas = require("@napi-rs/canvas");
 
-async function farmfunction(interaction) {
-  const cropRef = db
-    .collection("users")
-    .doc(interaction.user.id)
-    .collection("myFarm")
-    .doc("crop1");
-  const cropDoc = await cropRef.get();
-  const cropData = cropDoc.data();
-  const type = cropData.type;
-  const time = cropData.createAt._seconds;
-
+async function farmImageMaker() {
   const base =
     "https://cdn.discordapp.com/attachments/1110128243220172833/1110398686569177208/Sprite-0001-non.png";
   const assets =
@@ -68,33 +58,4 @@ async function farmfunction(interaction) {
   const attachment = new AttachmentBuilder(buffer, {
     name: "myFarm.png",
   });
-
-  const row = new ActionRowBuilder().addComponents(
-    new ButtonBuilder().setCustomId("refresh").setLabel("🔄").setStyle(1)
-  );
-
-  const collector = interaction.channel.createMessageComponentCollector({
-    componentType: ComponentType.Button,
-    // time: 60000,
-  });
-
-  collector.on("collect", async (i) => {
-    if (i.user.id === interaction.user.id) {
-      console.log(i.message);
-    } else {
-      i.reply({ content: `These buttons aren't for you!`, ephemeral: true });
-    }
-  });
-
-  collector.on("end", (collected) => {
-    console.log(`Collected ${collected.size} interactions.`);
-  });
-
-  interaction.reply({
-    content: "farm",
-    files: [attachment],
-    components: [row],
-  });
 }
-
-module.exports = farmfunction;
