@@ -43,14 +43,13 @@ async function farmfunction(interaction) {
     if (i.user.id === interaction.user.id) {
       switch (i.customId) {
         case "refresh":
+          await i.deferUpdate();
           message = {
             content: "editfarm",
             files: [await farmImageMaker(type, time)],
             components: [row],
           };
-          i.message.edit(message);
-          i.deferReply();
-          i.deleteReply();
+          await i.message.edit(message);
           break;
       }
     } else {
