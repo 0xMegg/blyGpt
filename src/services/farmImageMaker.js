@@ -1,16 +1,7 @@
-const { db, storage } = require("../fbase");
-const {
-  EmbedBuilder,
-  ButtonStyle,
-  ButtonBuilder,
-  ActionRowBuilder,
-  ComponentType,
-  AttachmentBuilder,
-} = require("discord.js");
-const { Pagination, ExtraRowPosition } = require("pagination.djs");
+const { AttachmentBuilder } = require("discord.js");
 const Canvas = require("@napi-rs/canvas");
 
-async function farmImageMaker() {
+async function farmImageMaker(type, time) {
   const base =
     "https://cdn.discordapp.com/attachments/1110128243220172833/1110398686569177208/Sprite-0001-non.png";
   const assets =
@@ -58,4 +49,8 @@ async function farmImageMaker() {
   const attachment = new AttachmentBuilder(buffer, {
     name: "myFarm.png",
   });
+
+  return attachment;
 }
+
+module.exports = farmImageMaker;
