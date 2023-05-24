@@ -41,12 +41,16 @@ async function farmfunction(interaction) {
 
   collector.on("collect", async (i) => {
     if (i.user.id === interaction.user.id) {
-      message = {
-        content: "farm",
-        files: [await farmImageMaker(type, time)],
-        components: [row],
-      };
-      i.message.edit("boo");
+      switch (i.customId) {
+        case "refresh":
+          message = {
+            content: "editfarm",
+            files: [await farmImageMaker(type, time)],
+            components: [row],
+          };
+          i.message.edit(message);
+          break;
+      }
     } else {
       i.reply({ content: `These buttons aren't for you!`, ephemeral: true });
     }

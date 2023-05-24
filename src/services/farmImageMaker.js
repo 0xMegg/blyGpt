@@ -21,10 +21,10 @@ async function farmImageMaker(type, time) {
       const now = new Date().getTime() / 1000;
       const gap = now - time;
       console.log(gap);
-      if (gap < 10) {
+      if (gap <= 10) {
         status = seed;
         console.log("seed");
-      } else if (10 < gap < 20) {
+      } else if (gap <= 20) {
         status = sprout;
         console.log("sprout");
       } else {

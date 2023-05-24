@@ -30,9 +30,8 @@ async function startfunction(interaction) {
       const docRef = db.collection("users").doc(i.user.id);
       const doc = await docRef.get();
       const docData = doc.data();
-      console.log(doc.data().gold);
 
-      i.reply(`${i.user.id} clicked on the ${i.customId} button.`);
+      // i.reply(`${i.user.id} clicked on the ${i.customId} button.`);
       switch (i.customId) {
         case "item1":
           docRef.update({ gold: docData.gold - 1 });
@@ -45,10 +44,6 @@ async function startfunction(interaction) {
             createAt: new Date(),
           });
           interaction.channel.send("item1 button acted");
-          break;
-
-        default:
-          interaction.channel.send("not item1");
           break;
       }
     } else {
