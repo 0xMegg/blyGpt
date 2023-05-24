@@ -49,6 +49,8 @@ async function farmfunction(interaction) {
             components: [row],
           };
           i.message.edit(message);
+          i.deferReply();
+          i.deleteReply();
           break;
       }
     } else {
