@@ -2,8 +2,18 @@ const fs = require("node:fs");
 const path = require("node:path");
 const { Client, Collection, GatewayIntentBits } = require("discord.js");
 const { token } = require("./config");
+const shopfunction = require("./functions/shopfunction.js");
 
-const client = new Client({ intents: [GatewayIntentBits.Guilds] });
+const client = new Client({
+  intents: [
+    GatewayIntentBits.Guilds,
+    GatewayIntentBits.MessageContent,
+    GatewayIntentBits.GuildMembers,
+    GatewayIntentBits.GuildMessages,
+    GatewayIntentBits.GuildMessageReactions,
+    GatewayIntentBits.GuildVoiceStates,
+  ],
+});
 
 client.commands = new Collection();
 const commandsPath = path.join(__dirname, "commands");
@@ -41,5 +51,58 @@ client.on("interactionCreate", async (interaction) => {
     });
   }
 });
+
+client.on("messageCreate", async (message) => {
+  const splittedMessages = message.content.split(" ");
+  if (splittedMessages[0] === "bly") {
+    console.log("recognized");
+    const command = splittedMessages[1];
+    const arg = splittedMessages.slice(2);
+    if (command === "game") {
+      shopfunction(message);
+    }
+  }
+});
+
+// client.on("messageCreate", async (message) => {
+//   console.log("123");
+//   const messageContent = message.content.split(" ");
+
+//   if (messageContent[0] === "ssco") {
+//     const command = messageContent[1];
+//     const args = messageContent.slice(2);
+
+//     if (command === "admin") {
+//       const row = new Discord.MessageActionRow().addComponents(
+//         new Discord.MessageButton()
+//           .setCustomId("startQuizRandom")
+//           .setLabel("Start Quiz (Random)")
+//           .setStyle("PRIMARY"),
+//         new Discord.MessageButton()
+//           .setCustomId("endQuiz")
+//           .setLabel("End Quiz")
+//           .setStyle("DANGER"),
+//         new Discord.MessageButton()
+//           .setCustomId("addQuiz")
+//           .setLabel("Add Quiz")
+//           .setStyle("PRIMARY")
+//       );
+
+//       const embed = new Discord.MessageEmbed()
+//         .setTitle("Admin commands")
+//         .setDescription("Click a button to execute a command.");
+
+//       message.reply({ embeds: [embed], components: [row], ephemeral: true });
+//     } else if (command === "quizmaster") {
+//       setQuizMaster.execute(message, args);
+//     } else {
+//       const embed = new Discord.MessageEmbed()
+//         .setColor("#ff0000")
+//         .setTitle("Unknown command")
+//         .setDescription("Please check the command and try again.");
+//       message.reply({ embeds: [embed] });
+//     }
+//   }
+// });
 
 client.login(token);
