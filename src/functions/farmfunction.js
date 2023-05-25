@@ -34,33 +34,6 @@ async function farmfunction(interaction) {
     components: [row],
   };
 
-  const collector = interaction.channel.createMessageComponentCollector({
-    componentType: ComponentType.Button,
-    // time: 60000,
-  });
-
-  collector.on("collect", async (i) => {
-    if (i.user.id === interaction.user.id) {
-      switch (i.customId) {
-        case "refresh":
-          await i.deferUpdate();
-          message = {
-            content: "editfarm",
-            files: [await farmImageMaker(type, time)],
-            components: [row],
-          };
-          await i.message.edit(message);
-          break;
-      }
-    } else {
-      i.reply({ content: `These buttons aren't for you!`, ephemeral: true });
-    }
-  });
-
-  collector.on("end", (collected) => {
-    console.log(`Collected ${collected.size} interactions.`);
-  });
-
   interaction.reply(message);
 }
 

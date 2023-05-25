@@ -1,17 +1,35 @@
-// const collector = interaction.channel.createMessageComponentCollector({
+// const { db, storage } = require("../fbase");
+// const {
+//   EmbedBuilder,
+//   ButtonStyle,
+//   ButtonBuilder,
+//   ActionRowBuilder,
+//   ComponentType,
+//   AttachmentBuilder,
+// } = require("discord.js");
+// const { Pagination, ExtraRowPosition } = require("pagination.djs");
+// const Canvas = require("@napi-rs/canvas");
+// const farmImageMaker = require("../services/farmImageMaker");
+
+// async function collectors(interaction) {
+//   console.log("alive");
+//   const collector = interaction.channel.createMessageComponentCollector({
 //     componentType: ComponentType.Button,
 //     // time: 60000,
 //   });
 
 //   collector.on("collect", async (i) => {
 //     if (i.user.id === interaction.user.id) {
-//       const docRef = db.collection("users").doc(i.user.id);
-//       const doc = await docRef.get();
-//       const docData = doc.data();
-//       console.log(doc.data().gold);
-
-//       i.reply(`${i.user.id} clicked on the ${i.customId} button.`);
 //       switch (i.customId) {
+//         case "refresh":
+//           await i.deferUpdate();
+//           message = {
+//             content: "editfarm",
+//             files: [await farmImageMaker(type, time)],
+//             components: [row],
+//           };
+//           await i.message.edit(message);
+//           break;
 //         case "item1":
 //           docRef.update({ gold: docData.gold - 1 });
 //           const newCollectionRef = docRef.collection("myFarm");
@@ -24,10 +42,8 @@
 //           });
 //           interaction.channel.send("item1 button acted");
 //           break;
-
 //         default:
-//           interaction.channel.send("not item1");
-//           break;
+//           interaction.channel.send("fuckoff");
 //       }
 //     } else {
 //       i.reply({ content: `These buttons aren't for you!`, ephemeral: true });
@@ -37,3 +53,6 @@
 //   collector.on("end", (collected) => {
 //     console.log(`Collected ${collected.size} interactions.`);
 //   });
+// }
+
+// module.exports = collectors;

@@ -5,6 +5,7 @@ const {
   ButtonBuilder,
   ActionRowBuilder,
   ComponentType,
+  SelectMenuBuilder,
 } = require("discord.js");
 
 async function startfunction(interaction) {
@@ -13,56 +14,52 @@ async function startfunction(interaction) {
 
   const embed1 = new EmbedBuilder().setImage(imageUrl1);
 
-  const row = new ActionRowBuilder().addComponents(
+  const SelectMenuRow = new ActionRowBuilder().addComponents(
+    new SelectMenuBuilder()
+      .setCustomId("location")
+      .setPlaceholder("장소")
+      .addOptions(
+        {
+          label: "first label",
+          description: "first desc",
+          value: "value1",
+        },
+        {
+          label: "second label",
+          description: "second desc",
+          value: "value2",
+        }
+      )
+  );
+  const ButtonRow = new ActionRowBuilder().addComponents(
     new ButtonBuilder().setCustomId("item1").setLabel("Item 1").setStyle(1),
     new ButtonBuilder().setCustomId("item2").setLabel("Item 2").setStyle(1),
     new ButtonBuilder().setCustomId("item3").setLabel("Item 3").setStyle(1),
     new ButtonBuilder().setCustomId("item4").setLabel("Item 4").setStyle(1)
   );
 
+  interaction.reply({
+    embeds: [embed1],
+    components: [SelectMenuRow, ButtonRow],
+  });
+
+  const filter = (interaction) => {
+    return interaction.customId === "item1";
+  };
+
   const collector = interaction.channel.createMessageComponentCollector({
+    filter,
     componentType: ComponentType.Button,
     // time: 60000,
   });
 
-  collector.on("collect", async (i) => {
-    if (i.user.id === interaction.user.id) {
-      const docRef = db.collection("users").doc(i.user.id);
-      const doc = await docRef.get();
-      const docData = doc.data();
-
-      // i.reply(`${i.user.id} clicked on the ${i.customId} button.`);
-      switch (i.customId) {
-        case "item1":
-          docRef.update({ gold: docData.gold - 1 });
-          const newCollectionRef = docRef.collection("myFarm");
-          const newDocRef = newCollectionRef.doc("crop1");
-          docRef.update({ exp: 1 });
-          // Add data to the new document
-          await newDocRef.set({
-            type: 1,
-            createAt: new Date(),
-          });
-          interaction.channel.send("item1 button acted");
-          break;
-      }
-    } else {
-      i.reply({ content: `These buttons aren't for you!`, ephemeral: true });
+  collector.on("collect", async (interaction) => {
+    if (interaction.customId === "item1") {
+      await interaction.deferUpdate();
+      console.log(interaction.customId);
+      interaction.channel.send("item1 button");
     }
   });
-
-  collector.on("end", (collected) => {
-    console.log(`Collected ${collected.size} interactions.`);
-  });
-  // let data1 = "not changed";
-
-  // const docRef = db.collection("users").doc("1016972120330358807");
-  // const doc = await docRef.get();
-  // data1 = doc.data().exp;
-  // console.log(typeof data1);
-  // console.log(data1);
-
-  interaction.reply({ embeds: [embed1], components: [row] });
 }
 
 module.exports = startfunction;
