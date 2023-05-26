@@ -2,6 +2,7 @@ const { AttachmentBuilder } = require("discord.js");
 const Canvas = require("@napi-rs/canvas");
 
 async function farmImageMaker(type, time) {
+  let status = "";
   const base =
     "https://cdn.discordapp.com/attachments/1110128243220172833/1110398686569177208/Sprite-0001-non.png";
   const assets =
@@ -12,10 +13,6 @@ async function farmImageMaker(type, time) {
     "https://cdn.discordapp.com/attachments/1110128243220172833/1110478589255753728/sprout.png";
   const carrot =
     "https://cdn.discordapp.com/attachments/1110128243220172833/1110478589490643025/carrot.png";
-
-  const canvas = Canvas.createCanvas(512, 288);
-  const context = canvas.getContext("2d");
-  let status = "";
   switch (type) {
     case 1:
       const now = new Date().getTime() / 1000;
@@ -36,9 +33,12 @@ async function farmImageMaker(type, time) {
       console.log("case2");
       break;
     default:
-      console.log("에러에러");
+      console.log("image maker input error");
       break;
   }
+
+  const canvas = Canvas.createCanvas(512, 288);
+  const context = canvas.getContext("2d");
 
   //base layer
   context.drawImage(await Canvas.loadImage(base), 0, 0, 512, 288);

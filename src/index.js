@@ -7,7 +7,7 @@ const {
   ComponentType,
 } = require("discord.js");
 const { token } = require("./config");
-const shopfunction = require("./functions/shopfunction.js");
+const farmfunction = require("./functions/farmfunction.js");
 
 const client = new Client({
   intents: [
@@ -58,27 +58,12 @@ client.on("interactionCreate", async (interaction) => {
 });
 
 client.on("messageCreate", async (interaction) => {
-  // const collector = interaction.channel.createMessageComponentCollector({
-  //   componentType: ComponentType.Button,
-  //   // time: 60000,
-  // });
-  // collector.on("collect", async (i) => {
-  //   console.log(i.customId);
-  //   if (i.customId === "item1") {
-  //     interaction.channel.send("fuckyou");
-  //     return;
-  //   }
-  // });
-  // collector.on("end", (collected) => {
-  //   console.log(`Collected ${collected.size} interactions.`);
-  // });
-
   const splittedMessages = interaction.content.split(" ");
-  if (splittedMessages[0] === "bly") {
+  if (splittedMessages[0] === "a") {
     const command = splittedMessages[1];
     const arg = splittedMessages.slice(2);
-    if (command === "game") {
-      shopfunction(interaction);
+    if (command === "a") {
+      farmfunction(interaction);
     }
   }
 });
