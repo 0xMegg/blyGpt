@@ -15,16 +15,17 @@ async function shopfunction(interaction, farm) {
 
   const embed1 = new EmbedBuilder().setImage(imageUrl1);
   const rows = rowMaker("shop");
-  if (farm) {
-    interaction.channel.send({
-      embeds: [embed1],
-      components: rows,
-    });
+  const message = {
+    embeds: [embed1],
+    components: rows,
+    files: [],
+  };
+  if (farm === "send") {
+    interaction.channel.send(message);
+  } else if (farm === "editReply") {
+    interaction.editReply(message);
   } else {
-    interaction.reply({
-      embeds: [embed1],
-      components: rows,
-    });
+    interaction.reply(message);
   }
 }
 

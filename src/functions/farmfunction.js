@@ -14,6 +14,8 @@ const rowMaker = require("../services/rowMaker");
 const shopfunction = require("./shopfunction");
 
 async function farmfunction(interaction) {
+  let time;
+  let type;
   try {
     const cropRef = db
       .collection("users")
@@ -22,22 +24,21 @@ async function farmfunction(interaction) {
       .doc("crop1");
     const cropDoc = await cropRef.get();
     const cropData = cropDoc.data();
-    const time = cropData?.createAt?._seconds;
-    const type = cropData?.type;
-
-    const attachment = await farmImageMaker(type, time);
-    const rows = rowMaker("farm");
-
-    let message = {
-      files: [attachment],
-      components: rows,
-    };
-
-    interaction.reply(message);
+    time = cropData?.createAt?._seconds;
+    type = cropData?.type;
   } catch (e) {
     console.log(e);
-    shopfunction(interaction, true);
+    shopfunction(interaction, "send");
   }
+  const attachment = await farmImageMaker(type, time);
+  const rows = rowMaker("farm");
+
+  let message = {
+    files: [attachment],
+    components: rows,
+  };
+
+  interaction.reply(message);
   // const filter = (interaction) => {
   //   return interaction.customId === "item1";
   // };
@@ -54,9 +55,18 @@ async function farmfunction(interaction) {
       case "location":
         switch (interaction.values[0]) {
           case "farm":
+            const newAttachment = await farmImageMaker(type, time);
+            const newMessage = { files: [newAttachment], components: rows };
+            interaction.editReply(newMessage);
+            break;
           case "shop":
+            shopfunction(interaction, "editReply");
+            break;
           case "inventory":
+            interaction.editReply("3");
+            break;
         }
+        // interaction.editReply(interaction.values[0]);
         console.log(interaction.values[0]);
         break;
       case "item1":
