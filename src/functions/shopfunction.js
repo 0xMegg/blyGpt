@@ -9,7 +9,7 @@ const {
   StringSelectMenuBuilder,
 } = require("discord.js");
 
-async function shopfunction(interaction, farm) {
+async function shopfunction(interaction, messageType) {
   const imageUrl1 =
     "https://firebasestorage.googleapis.com/v0/b/fir-study-1c95a.appspot.com/o/Q_80%2C0.jpeg?alt=media&token=9c015d0e-158e-4d8a-9705-5d3800ee7369";
 
@@ -20,9 +20,9 @@ async function shopfunction(interaction, farm) {
     components: rows,
     files: [],
   };
-  if (farm === "send") {
+  if (messageType === "send") {
     interaction.channel.send(message);
-  } else if (farm === "editReply") {
+  } else if (messageType === "editReply") {
     interaction.editReply(message);
   } else {
     interaction.reply(message);

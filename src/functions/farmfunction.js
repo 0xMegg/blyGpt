@@ -12,6 +12,7 @@ const Canvas = require("@napi-rs/canvas");
 const farmImageMaker = require("../services/farmImageMaker");
 const rowMaker = require("../services/rowMaker");
 const shopfunction = require("./shopfunction");
+const inventoryFunction = require("./inventoryFunction");
 
 async function farmfunction(interaction) {
   let time;
@@ -49,29 +50,40 @@ async function farmfunction(interaction) {
     // time: 60000,
   });
 
+  async function refreshFarm(interaction) {
+    const newAttachment = await farmImageMaker(type, time);
+    const newMessage = {
+      files: [newAttachment],
+      components: rows,
+      embeds: [],
+    };
+    interaction.editReply(newMessage);
+  }
+
   collector.on("collect", async (interaction) => {
     await interaction.deferUpdate();
     switch (interaction.customId) {
       case "location":
         switch (interaction.values[0]) {
           case "farm":
-            const newAttachment = await farmImageMaker(type, time);
-            const newMessage = { files: [newAttachment], components: rows };
-            interaction.editReply(newMessage);
+            refreshFarm(interaction);
             break;
           case "shop":
             shopfunction(interaction, "editReply");
             break;
           case "inventory":
-            interaction.editReply("3");
+            inventoryFunction(interaction, "editReply");
             break;
         }
-        // interaction.editReply(interaction.values[0]);
-        console.log(interaction.values[0]);
         break;
       case "item1":
         console.log(interaction.customId);
         break;
+      case "refresh":
+        refreshFarm(interaction);
+        break;
+      default:
+        interaction.channel.send(`${interaction.customId} 미구현 기능입니다`);
     }
   });
 }

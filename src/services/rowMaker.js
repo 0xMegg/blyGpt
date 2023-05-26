@@ -32,7 +32,8 @@ function rowMaker(location) {
     new ButtonBuilder()
       .setCustomId("harvest")
       .setLabel("harvest all")
-      .setStyle(1)
+      .setStyle(1),
+    new ButtonBuilder().setCustomId("refresh").setLabel("🔄").setStyle(1)
   );
 
   const shopButtonRow = new ActionRowBuilder().addComponents(

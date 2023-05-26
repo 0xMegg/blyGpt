@@ -26,11 +26,11 @@ async function startfunction(interaction) {
   });
 
   const imageUrl1 =
-    "https://firebasestorage.googleapis.com/v0/b/fir-study-1c95a.appspot.com/o/Q_80%2C0.jpeg?alt=media&token=9c015d0e-158e-4d8a-9705-5d3800ee7369";
+    "https://cdn.discordapp.com/attachments/1110128243220172833/1111544677829705781/Q_800.jpeg";
   const imageUrl2 =
-    "https://firebasestorage.googleapis.com/v0/b/fir-study-1c95a.appspot.com/o/NewJeans_theMEGASTUDY.jpg?alt=media&token=fc752bb8-6689-43df-a2d5-01a5bbc1a625";
+    "https://cdn.discordapp.com/attachments/1110128243220172833/1111544677427056670/NewJeans_theMEGASTUDY.jpg";
   const imageUrl3 =
-    "https://firebasestorage.googleapis.com/v0/b/fir-study-1c95a.appspot.com/o/maxresdefault.jpg?alt=media&token=c781148d-93d7-454b-9e7e-24a7031998a2";
+    "https://cdn.discordapp.com/attachments/1110128243220172833/1111544677087330416/maxresdefault.jpg";
   // Create a new embed
   const embed1 = new EmbedBuilder()
     .setTitle("Welcome1")
