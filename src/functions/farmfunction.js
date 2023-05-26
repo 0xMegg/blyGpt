@@ -15,16 +15,14 @@ const shopfunction = require("./shopfunction");
 const inventoryFunction = require("./inventoryFunction");
 
 async function farmfunction(interaction) {
+  const userRef = db.collection("users").doc(interaction.author.id);
+  const userData = (await userRef.get()).data();
+  const cropRef = userRef.collection("myFarm").doc("crop1");
+  const cropDoc = await cropRef.get();
+  const cropData = cropDoc.data();
   let time;
   let type;
   try {
-    const cropRef = db
-      .collection("users")
-      .doc(interaction.author.id)
-      .collection("myFarm")
-      .doc("crop1");
-    const cropDoc = await cropRef.get();
-    const cropData = cropDoc.data();
     time = cropData?.createAt?._seconds;
     type = cropData?.type;
   } catch (e) {
@@ -77,10 +75,25 @@ async function farmfunction(interaction) {
         }
         break;
       case "item1":
-        console.log(interaction.customId);
+        console.log("-----before-----");
+        console.log(userData.gold);
+        userRef.update({ gold: userData.gold - 1 });
+        cropRef.set({
+          type: 1,
+          createAt: new Date(),
+        });
+        console.log("-----after-----");
+        console.log(userData.gold);
         break;
       case "refresh":
         refreshFarm(interaction);
+        break;
+      case "harvest":
+        // if (gap > 20) {
+        //   console.log("ready to harvest");
+        // } else {
+        console.log("not ready");
+        // }
         break;
       default:
         interaction.channel.send(`${interaction.customId} 미구현 기능입니다`);
