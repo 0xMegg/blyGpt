@@ -8,7 +8,7 @@ function rowMaker(location) {
   const locationMenuRow = new ActionRowBuilder().addComponents(
     new StringSelectMenuBuilder()
       .setCustomId("location")
-      .setPlaceholder("장소")
+      .setPlaceholder("location")
       .addOptions(
         {
           label: "farm",

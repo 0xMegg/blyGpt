@@ -26,16 +26,25 @@ async function farmfunction(interaction) {
 
   try {
     const userRef = db.collection("users").doc(interaction.author.id);
+    const userData = (await userRef.get()).data();
     const cropRef = userRef.collection("myFarm").doc("crop1");
     const cropDoc = await cropRef.get();
     const cropData = cropDoc.data();
+
     const time = cropData?.createAt?._seconds;
     const type = cropData?.type;
+
+    const title = `${interaction.author.username}'s Farm`;
+    const content = `💰 ${userData.gold}`;
     const attachment = await farmImageMaker(type, time);
     const rows = rowMaker("farm");
     const message = {
-      content: "",
-      embeds: [],
+      embeds: [
+        {
+          title: title,
+          description: content,
+        },
+      ],
       files: [attachment],
       components: rows,
     };
@@ -46,15 +55,7 @@ async function farmfunction(interaction) {
     shopfunction(interaction, "send");
   }
 
-  // const filter = (interaction) => {
-  //   return interaction.customId === "item1";
-  // };
-
-  const collector = interaction.channel.createMessageComponentCollector({
-    // filter,
-    // componentType: ComponentType.Button,
-    // time: 60000,
-  });
+  const collector = interaction.channel.createMessageComponentCollector({});
 
   async function refreshFarm(interaction) {
     const userRef = db.collection("users").doc(interaction.user.id);

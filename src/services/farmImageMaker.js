@@ -4,9 +4,11 @@ const Canvas = require("@napi-rs/canvas");
 async function farmImageMaker(type, time) {
   let status = "";
   const base =
-    "https://cdn.discordapp.com/attachments/1110128243220172833/1110398686569177208/Sprite-0001-non.png";
-  const assets =
-    "https://cdn.discordapp.com/attachments/1110128243220172833/1110398742508605440/assets_3232.png";
+    "https://cdn.discordapp.com/attachments/1110128243220172833/1113010845258096680/3x3.png";
+  // const base =
+  //   "https://cdn.discordapp.com/attachments/1110128243220172833/1110398686569177208/Sprite-0001-non.png";
+  // const assets =
+  //   "https://cdn.discordapp.com/attachments/1110128243220172833/1110398742508605440/assets_3232.png";
   const seed =
     "https://cdn.discordapp.com/attachments/1110128243220172833/1110478589809401886/seed.png";
   const sprout =
@@ -37,14 +39,14 @@ async function farmImageMaker(type, time) {
       break;
   }
 
-  const canvas = Canvas.createCanvas(512, 288);
+  const canvas = Canvas.createCanvas(400, 400);
   const context = canvas.getContext("2d");
 
   //base layer
-  context.drawImage(await Canvas.loadImage(base), 0, 0, 512, 288);
+  context.drawImage(await Canvas.loadImage(base), 0, 0, 400, 400);
   //seed layer for test
   if (status !== "") {
-    context.drawImage(await Canvas.loadImage(status), 322, 83, 32, 32);
+    context.drawImage(await Canvas.loadImage(status), 71, 71, 32, 32);
   }
 
   const buffer = await canvas.toBuffer("image/png");
