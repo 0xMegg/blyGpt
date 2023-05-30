@@ -59,10 +59,10 @@ client.on("interactionCreate", async (interaction) => {
 
 client.on("messageCreate", async (interaction) => {
   const splittedMessages = interaction.content.split(" ");
-  if (splittedMessages[0] === "bly") {
+  if (splittedMessages[0] === "a") {
     const command = splittedMessages[1];
     const arg = splittedMessages.slice(2);
-    if (command === "game") {
+    if (command === "a") {
       farmfunction(interaction);
     }
   }

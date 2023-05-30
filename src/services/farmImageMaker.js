@@ -33,7 +33,7 @@ async function farmImageMaker(type, time) {
       console.log("case2");
       break;
     default:
-      console.log("image maker input error");
+      console.log("no crops");
       break;
   }
 
@@ -43,7 +43,9 @@ async function farmImageMaker(type, time) {
   //base layer
   context.drawImage(await Canvas.loadImage(base), 0, 0, 512, 288);
   //seed layer for test
-  context.drawImage(await Canvas.loadImage(status), 322, 83, 32, 32);
+  if (status !== "") {
+    context.drawImage(await Canvas.loadImage(status), 322, 83, 32, 32);
+  }
 
   const buffer = await canvas.toBuffer("image/png");
   const attachment = new AttachmentBuilder(buffer, {

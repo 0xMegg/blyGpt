@@ -13,24 +13,26 @@ const inventoryImageMaker = require("../services/inventoryImageMaker");
 const rowMaker = require("../services/rowMaker");
 
 async function inventoryFunction(interaction, messageType) {
-  // try {
-  //   const cropRef = db
-  //     .collection("users")
-  //     .doc(interaction.author.id)
-  //     .collection("myFarm")
-  //     .doc("crop1");
-  //   const cropDoc = await cropRef.get();
-  //   const cropData = cropDoc.data();
-  //   time = cropData?.createAt?._seconds;
-  //   type = cropData?.type;
-  // } catch (e) {
-  //   console.log(e);
-  //   shopfunction(interaction, "send");
-  // }
+  const userRef = db.collection("users").doc(interaction.user.id);
+  const userData = (await userRef.get()).data();
+  const cropRef = userRef.collection("myFarm").doc("crop1");
+  const cropDoc = await cropRef.get();
+  const cropData = cropDoc.data();
+  const invenRef = userRef.collection("myInven").doc("inven1");
+  const invenDoc = await invenRef.get();
+  const invenData = invenDoc.data();
+
+  const itemType = invenData.type;
+  const itemNumber = invenData.number;
+
   const attachment = await inventoryImageMaker();
   const rows = rowMaker("inventory");
 
+  console.log(itemType);
+  console.log(itemNumber);
+
   const message = {
+    content: itemType + " " + itemNumber,
     embeds: [],
     files: [attachment],
     components: rows,
