@@ -11,13 +11,13 @@ const { Pagination, ExtraRowPosition } = require("pagination.djs");
 const Canvas = require("@napi-rs/canvas");
 const farmImageMaker = require("../services/farmImageMaker");
 const rowMaker = require("../services/rowMaker");
-const messageMaker = require("../services/messageMaker");
+const { farmMessageMaker } = require("../services/messageMaker");
 const shopfunction = require("./shopfunction");
 const inventoryFunction = require("./inventoryfunction");
 
 async function farmfunction(interaction) {
   try {
-    const message = await messageMaker(interaction, "farm", "author");
+    const message = await farmMessageMaker(interaction, "author");
     interaction.reply(message);
   } catch (e) {
     console.log(e);
@@ -27,7 +27,7 @@ async function farmfunction(interaction) {
   const collector = interaction.channel.createMessageComponentCollector({});
 
   async function refreshFarm(interaction) {
-    const message = await messageMaker(interaction, "farm", "user");
+    const message = await farmMessageMaker(interaction, "user");
     interaction.editReply(message);
   }
 
@@ -35,11 +35,11 @@ async function farmfunction(interaction) {
     await interaction.deferUpdate();
     switch (interaction.customId) {
       case "location":
-        if (interaction.value[0] === "farm") {
+        if (interaction.values[0] === "farm") {
           refreshFarm(interaction);
-        } else if (interaction.value[0] === "shop") {
+        } else if (interaction.values[0] === "shop") {
           shopfunction(interaction, "editReply");
-        } else if (interaction.value[0] === "inventory") {
+        } else if (interaction.values[0] === "inventory") {
           inventoryFunction(interaction, "editReply");
         }
         break;

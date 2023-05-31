@@ -15,6 +15,7 @@ async function farmImageMaker(type, time) {
     "https://cdn.discordapp.com/attachments/1110128243220172833/1110478589255753728/sprout.png";
   const carrot =
     "https://cdn.discordapp.com/attachments/1110128243220172833/1110478589490643025/carrot.png";
+
   if (type === 1) {
     const now = new Date().getTime() / 1000;
     const gap = now - time;

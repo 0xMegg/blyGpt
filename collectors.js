@@ -28,7 +28,7 @@ async function collectors(interaction) {
           components: [row],
         };
         await i.message.edit(message);
-      } else if (i.customId === "iterm1") {
+      } else if (i.customId === "item1") {
         docRef.update({ gold: docData.gold - 1 });
         const newCollectionRef = docRef.collection("myFarm");
         const newDocRef = newCollectionRef.doc("crop1");
