@@ -13,7 +13,7 @@ async function inventoryImageMaker() {
 
   const buffer = await canvas.toBuffer("image/png");
   const attachment = new AttachmentBuilder(buffer, {
-    name: "myFarm.png",
+    name: "myInventory.png",
   });
 
   return attachment;

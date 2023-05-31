@@ -11,44 +11,13 @@ const { Pagination, ExtraRowPosition } = require("pagination.djs");
 const Canvas = require("@napi-rs/canvas");
 const farmImageMaker = require("../services/farmImageMaker");
 const rowMaker = require("../services/rowMaker");
+const messageMaker = require("../services/messageMaker");
 const shopfunction = require("./shopfunction");
-const inventoryFunction = require("./inventoryFunction");
+const inventoryFunction = require("./inventoryfunction");
 
 async function farmfunction(interaction) {
-  // const userRef = db.collection("users").doc(interaction.author.id);
-  // const userData = (await userRef.get()).data();
-  // const cropRef = userRef.collection("myFarm").doc("crop1");
-  // const cropDoc = await cropRef.get();
-  // const cropData = cropDoc.data();
-  // const invenRef = userRef.collection("myInven").doc("inven1");
-  // const invenDoc = await invenRef.get();
-  // const invenData = invenDoc.data();
-
   try {
-    const userRef = db.collection("users").doc(interaction.author.id);
-    const userData = (await userRef.get()).data();
-    const cropRef = userRef.collection("myFarm").doc("crop1");
-    const cropDoc = await cropRef.get();
-    const cropData = cropDoc.data();
-
-    const time = cropData?.createAt?._seconds;
-    const type = cropData?.type;
-
-    const title = `${interaction.author.username}'s Farm`;
-    const content = `💰 ${userData.gold}`;
-    const attachment = await farmImageMaker(type, time);
-    const rows = rowMaker("farm");
-    const message = {
-      embeds: [
-        {
-          title: title,
-          description: content,
-        },
-      ],
-      files: [attachment],
-      components: rows,
-    };
-
+    const message = await messageMaker(interaction, "farm", "author");
     interaction.reply(message);
   } catch (e) {
     console.log(e);
@@ -58,20 +27,7 @@ async function farmfunction(interaction) {
   const collector = interaction.channel.createMessageComponentCollector({});
 
   async function refreshFarm(interaction) {
-    const userRef = db.collection("users").doc(interaction.user.id);
-    const cropRef = userRef.collection("myFarm").doc("crop1");
-    const cropDoc = await cropRef.get();
-    const cropData = cropDoc.data();
-    const time = cropData?.createAt?._seconds;
-    const type = cropData?.type;
-    const attachment = await farmImageMaker(type, time);
-    const rows = rowMaker("farm");
-    const message = {
-      content: "",
-      embeds: [],
-      files: [attachment],
-      components: rows,
-    };
+    const message = await messageMaker(interaction, "farm", "user");
     interaction.editReply(message);
   }
 

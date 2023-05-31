@@ -33,7 +33,15 @@ async function inventoryFunction(interaction, messageType) {
 
   const message = {
     content: itemType + " " + itemNumber,
-    embeds: [],
+    embeds: [
+      {
+        title: title,
+        description: content,
+        image: {
+          url: "attachment://myInventory.png",
+        },
+      },
+    ],
     files: [attachment],
     components: rows,
   };

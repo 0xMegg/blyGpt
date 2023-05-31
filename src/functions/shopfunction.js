@@ -16,7 +16,15 @@ async function shopfunction(interaction, messageType) {
   const rows = rowMaker("shop");
   const message = {
     content: "",
-    embeds: [embed1],
+    embeds: [
+      {
+        // title: title,
+        // description: content,
+        image: {
+          url: imageUrl1,
+        },
+      },
+    ],
     components: rows,
     files: [],
   };
