@@ -15,28 +15,24 @@ async function farmImageMaker(type, time) {
     "https://cdn.discordapp.com/attachments/1110128243220172833/1110478589255753728/sprout.png";
   const carrot =
     "https://cdn.discordapp.com/attachments/1110128243220172833/1110478589490643025/carrot.png";
-  switch (type) {
-    case 1:
-      const now = new Date().getTime() / 1000;
-      const gap = now - time;
-      console.log(gap);
-      if (gap <= 10) {
-        status = seed;
-        console.log("seed");
-      } else if (gap <= 20) {
-        status = sprout;
-        console.log("sprout");
-      } else {
-        status = carrot;
-        console.log("carrot");
-      }
-      break;
-    case 2:
-      console.log("case2");
-      break;
-    default:
-      console.log("no crops");
-      break;
+  if (type === 1) {
+    const now = new Date().getTime() / 1000;
+    const gap = now - time;
+    console.log(gap);
+    if (gap <= 10) {
+      status = seed;
+      console.log("seed");
+    } else if (gap <= 20) {
+      status = sprout;
+      console.log("sprout");
+    } else {
+      status = carrot;
+      console.log("carrot");
+    }
+  } else if (type === 2) {
+    console.log("case2");
+  } else {
+    console.log("no crops");
   }
 
   const canvas = Canvas.createCanvas(400, 400);

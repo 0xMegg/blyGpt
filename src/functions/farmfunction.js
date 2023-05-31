@@ -35,16 +35,12 @@ async function farmfunction(interaction) {
     await interaction.deferUpdate();
     switch (interaction.customId) {
       case "location":
-        switch (interaction.values[0]) {
-          case "farm":
-            refreshFarm(interaction);
-            break;
-          case "shop":
-            shopfunction(interaction, "editReply");
-            break;
-          case "inventory":
-            inventoryFunction(interaction, "editReply");
-            break;
+        if (interaction.value[0] === "farm") {
+          refreshFarm(interaction);
+        } else if (interaction.value[0] === "shop") {
+          shopfunction(interaction, "editReply");
+        } else if (interaction.value[0] === "inventory") {
+          inventoryFunction(interaction, "editReply");
         }
         break;
       case "item1":

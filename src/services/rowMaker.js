@@ -28,28 +28,25 @@ function rowMaker(location) {
       )
   );
 
-  const farmButtonRow = new ActionRowBuilder().addComponents(
-    new ButtonBuilder()
-      .setCustomId("harvest")
-      .setLabel("harvest all")
-      .setStyle(1),
-    new ButtonBuilder().setCustomId("refresh").setLabel("🔄").setStyle(1)
-  );
-
-  const shopButtonRow = new ActionRowBuilder().addComponents(
-    new ButtonBuilder().setCustomId("item1").setLabel("Item 1").setStyle(1),
-    new ButtonBuilder().setCustomId("item2").setLabel("Item 2").setStyle(1),
-    new ButtonBuilder().setCustomId("item3").setLabel("Item 3").setStyle(1),
-    new ButtonBuilder().setCustomId("item4").setLabel("Item 4").setStyle(1)
-  );
-
-  switch (location) {
-    case "farm":
-      return [locationMenuRow, farmButtonRow];
-    case "shop":
-      return [locationMenuRow, shopButtonRow];
-    case "inventory":
-      return [locationMenuRow];
+  if (location === "farm") {
+    const farmButtonRow = new ActionRowBuilder().addComponents(
+      new ButtonBuilder()
+        .setCustomId("harvest")
+        .setLabel("harvest all")
+        .setStyle(1),
+      new ButtonBuilder().setCustomId("refresh").setLabel("🔄").setStyle(1)
+    );
+    return [locationMenuRow, farmButtonRow];
+  } else if (location === "shop") {
+    const shopButtonRow = new ActionRowBuilder().addComponents(
+      new ButtonBuilder().setCustomId("item1").setLabel("Item 1").setStyle(1),
+      new ButtonBuilder().setCustomId("item2").setLabel("Item 2").setStyle(1),
+      new ButtonBuilder().setCustomId("item3").setLabel("Item 3").setStyle(1),
+      new ButtonBuilder().setCustomId("item4").setLabel("Item 4").setStyle(1)
+    );
+    return [locationMenuRow, shopButtonRow];
+  } else if (location === "inventory") {
+    return [locationMenuRow];
   }
 }
 

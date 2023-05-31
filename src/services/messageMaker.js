@@ -5,16 +5,15 @@ const rowMaker = require("./rowMaker");
 async function messageMaker(interaction, functionName, type) {
   let user;
   let imageUrl;
-  switch (type) {
-    case "author":
-      user = interaction.author;
-      imageUrl = "attachment://myFarm.png";
-      break;
-    case "user":
-      user = interaction.user;
-      imageUrl = "attachment://myFarm.png";
-      break;
+
+  if (type === "author") {
+    user = interaction.author;
+    imageUrl = "attachment://myFarm.png";
+  } else if (type === "user") {
+    user = interaction.user;
+    imageUrl = "attachment://myFarm.png";
   }
+
   const id = user.id;
   const userRef = db.collection("users").doc(id);
   const userData = (await userRef.get()).data();
