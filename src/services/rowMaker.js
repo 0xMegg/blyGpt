@@ -2,30 +2,25 @@ const {
   ButtonBuilder,
   ActionRowBuilder,
   StringSelectMenuBuilder,
+  StringSelectMenuOptionBuilder,
 } = require("discord.js");
 
 function rowMaker(location) {
   const locationMenuRow = new ActionRowBuilder().addComponents(
-    new StringSelectMenuBuilder()
-      .setCustomId("location")
-      .setPlaceholder("location")
-      .addOptions(
-        {
-          label: "farm",
-          description: "farm",
-          value: "farm",
-        },
-        {
-          label: "shop",
-          description: "shop",
-          value: "shop",
-        },
-        {
-          label: "inventory",
-          description: "inventory",
-          value: "inventory",
+    new StringSelectMenuBuilder().setCustomId("location").addOptions(
+      ...["farm", "shop", "inventory"].map((option) => {
+        const menu = new StringSelectMenuOptionBuilder()
+          .setLabel(option)
+          .setValue(option)
+          .setDescription(option);
+
+        if (option === location) {
+          menu.setDefault(true);
         }
-      )
+
+        return menu;
+      })
+    )
   );
 
   if (location === "farm") {
