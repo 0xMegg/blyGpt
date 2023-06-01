@@ -1,11 +1,6 @@
 const { db, storage } = require("../fbase");
-const {
-  EmbedBuilder,
-  ButtonStyle,
-  ButtonBuilder,
-  ActionRowBuilder,
-} = require("discord.js");
-const { Pagination, ExtraRowPosition } = require("pagination.djs");
+const { EmbedBuilder, ButtonStyle } = require("discord.js");
+const { Pagination } = require("pagination.djs");
 
 async function startfunction(interaction) {
   const userDoc = db.collection("users").doc(interaction.user.id);

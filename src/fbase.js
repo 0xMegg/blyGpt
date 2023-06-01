@@ -1,14 +1,5 @@
-const {
-  initializeApp,
-  applicationDefault,
-  cert,
-} = require("firebase-admin/app");
-const {
-  getFirestore,
-  Timestamp,
-  FieldValue,
-} = require("firebase-admin/firestore");
-const { getStorage } = require("firebase-admin/storage");
+const { initializeApp, cert } = require("firebase-admin/app");
+const { getFirestore } = require("firebase-admin/firestore");
 
 const serviceAccount = require("../fireConfig.json");
 
@@ -17,19 +8,6 @@ initializeApp({
 });
 
 const db = getFirestore();
-// const storage = getStorage();
 module.exports = {
   db,
-  // storage,
 };
-
-// db.collection("users")
-//   .get()
-//   .then((querySnapshot) => {
-//     querySnapshot.forEach((doc) => {
-//       console.log(`${doc.id} => ${doc.data()}`);
-//     });
-//   })
-//   .catch((error) => {
-//     console.error("Error getting documents: ", error);
-//   });
