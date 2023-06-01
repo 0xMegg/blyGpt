@@ -1,5 +1,6 @@
 const { db } = require("../fbase");
 const farmImageMaker = require("./farmImageMaker");
+const inventoryImageMaker = require("./inventoryImageMaker");
 const rowMaker = require("./rowMaker");
 
 async function farmMessageMaker(interaction, userType) {
@@ -47,7 +48,7 @@ async function shopMessageMaker(interaction) {
   const id = user.id;
   const userRef = db.collection("users").doc(id);
   const userData = (await userRef.get()).data();
-  const title = `${user.username}'s farm`;
+  const title = `${user.username}'s shop`;
   const content = `💰 ${userData.gold}`;
 
   const rows = rowMaker("shop");
@@ -70,29 +71,31 @@ async function shopMessageMaker(interaction) {
 }
 
 async function inventoryMessageMaker(interaction) {
-  const imageUrl =
-    "https://cdn.discordapp.com/attachments/1110128243220172833/1113381984803229786/shop.png";
-
   const user = interaction.user;
   const id = user.id;
   const userRef = db.collection("users").doc(id);
   const userData = (await userRef.get()).data();
-  const title = `${user.username}'s farm`;
+  const title = `${user.username}'s inventory`;
   const content = `💰 ${userData.gold}`;
+  const inventoryRef = userRef.collection("myInven").doc("inven1");
+  const inventoryData = (await inventoryRef.get()).data();
+  const itemType = inventoryData.type;
+  const itemNumber = inventoryData.number;
+  const attachment = await inventoryImageMaker(itemNumber);
 
-  const rows = rowMaker("shop");
+  const rows = rowMaker("inventory");
   const message = {
-    content: "shop",
+    content: "a",
     embeds: [
       {
         title: title,
         description: content,
         image: {
-          url: imageUrl,
+          url: "attachment://myInventory.png",
         },
       },
     ],
-    files: [],
+    files: [attachment],
     components: rows,
   };
 
