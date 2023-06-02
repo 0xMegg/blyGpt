@@ -1,7 +1,7 @@
 const { inventoryMessageMaker } = require(__dirname +
   "/../services/messageMaker");
 
-async function inventoryFunction(interaction, messageType) {
+async function inventoryfunction(interaction, messageType) {
   const message = await inventoryMessageMaker(interaction);
   if (messageType === "send") {
     interaction.channel.send(message);
@@ -12,4 +12,4 @@ async function inventoryFunction(interaction, messageType) {
   }
 }
 
-module.exports = inventoryFunction;
+module.exports = inventoryfunction;
