@@ -1,5 +1,6 @@
-const startCommandBuilder = require(`../SlashCommandBuilders/startCommandBuilder.js`);
-const startfunction = require(`../functions/startfunction.js`);
+const startCommandBuilder = require(__dirname +
+  `/../SlashCommandBuilders/startCommandBuilder.js`);
+const startfunction = require(__dirname + `/../functions/startfunction.js`);
 module.exports = {
   data: startCommandBuilder,
   async execute(interaction) {

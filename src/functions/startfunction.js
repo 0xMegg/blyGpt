@@ -1,4 +1,4 @@
-const { db, storage } = require("../fbase");
+const { db, storage } = require(__dirname + "/../fbase");
 const { EmbedBuilder, ButtonStyle } = require("discord.js");
 const { Pagination } = require("pagination.djs");
 

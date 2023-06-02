@@ -1,8 +1,8 @@
-const { db } = require("../fbase");
+const { db } = require(__dirname + "/../fbase");
 
-const { farmMessageMaker } = require("../services/messageMaker");
-const shopfunction = require("./shopfunction");
-const inventoryfunction = require("./inventoryfunction");
+const { farmMessageMaker } = require(__dirname + "/../services/messageMaker");
+const shopfunction = require(__dirname + "/shopfunction");
+const inventoryfunction = require(__dirname + "/inventoryfunction");
 
 async function farmfunction(interaction) {
   try {

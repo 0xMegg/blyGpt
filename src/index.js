@@ -6,8 +6,8 @@ const {
   GatewayIntentBits,
   ComponentType,
 } = require("discord.js");
-const { token } = require("./config");
-const farmfunction = require("./functions/farmfunction.js");
+const { token } = require(__dirname + "/config");
+const farmfunction = require(__dirname + "/functions/farmfunction.js");
 
 const client = new Client({
   intents: [

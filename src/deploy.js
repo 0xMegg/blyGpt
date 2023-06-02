@@ -3,7 +3,7 @@ const path = require("node:path");
 
 const { REST } = require("@discordjs/rest");
 const { Routes } = require("discord.js");
-const { clientId, guildId, token } = require("./config.js");
+const { clientId, guildId, token } = require(__dirname + "/config.js");
 
 const commands = [];
 const commandsPath = path.join(__dirname, "commands");

@@ -1,7 +1,7 @@
-const { db } = require("../fbase");
-const farmImageMaker = require("./farmImageMaker");
-const inventoryImageMaker = require("./inventoryImageMaker");
-const rowMaker = require("./rowMaker");
+const { db } = require(__dirname + "/../fbase");
+const farmImageMaker = require(__dirname + "/farmImageMaker");
+const inventoryImageMaker = require(__dirname + "/inventoryImageMaker");
+const rowMaker = require(__dirname + "/rowMaker");
 
 async function farmMessageMaker(interaction, userType) {
   let user;

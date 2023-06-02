@@ -1,4 +1,5 @@
-const { inventoryMessageMaker } = require("../services/messageMaker");
+const { inventoryMessageMaker } = require(__dirname +
+  "/../services/messageMaker");
 
 async function inventoryFunction(interaction, messageType) {
   const message = await inventoryMessageMaker(interaction);
