@@ -7,7 +7,7 @@ const {
   ComponentType,
 } = require("discord.js");
 const { token } = require(__dirname + "/config.js");
-// const farmfunction = require(__dirname + "/functions/farmfunction.js");
+const farmfunction = require(__dirname + "/functions/farmfunction.js");
 
 const client = new Client({
   intents: [
@@ -63,8 +63,7 @@ client.on("messageCreate", async (interaction) => {
     const command = splittedMessages[1];
     const arg = splittedMessages.slice(2);
     if (command === "a") {
-      // farmfunction(interaction);
-      interaction.channel.send("plz");
+      farmfunction(interaction);
     }
   }
 });

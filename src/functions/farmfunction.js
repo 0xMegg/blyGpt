@@ -2,7 +2,7 @@ const { db } = require(__dirname + "/../fbase");
 
 const { farmMessageMaker } = require(__dirname + "/../services/messageMaker");
 const shopfunction = require(__dirname + "/shopfunction");
-const inventoryfunction = require(__dirname + "/inventoryfunction");
+const invenfunction = require(__dirname + "/invenfunction");
 
 async function farmfunction(interaction) {
   try {
@@ -29,7 +29,7 @@ async function farmfunction(interaction) {
         } else if (interaction.values[0] === "shop") {
           shopfunction(interaction, "editReply");
         } else if (interaction.values[0] === "inventory") {
-          inventoryfunction(interaction, "editReply");
+          invenfunction(interaction, "editReply");
         }
         break;
       case "item1":
