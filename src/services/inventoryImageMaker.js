@@ -1,30 +1,21 @@
 const { AttachmentBuilder } = require("discord.js");
 const Canvas = require("@napi-rs/canvas");
+const {
+  zeroUrl,
+  oneUrl,
+  twoUrl,
+  threeUrl,
+  fourUrl,
+  fiveUrl,
+  sixUrl,
+  sevenUrl,
+  eightUrl,
+  nineUrl,
+} = require(__dirname + "/../assets/numbers");
+const { inventoryBaseUrl } = require(__dirname + "/../assets/bases");
 
 async function inventoryImageMaker(number) {
-  const base =
-    "https://cdn.discordapp.com/attachments/1110128243220172833/1113384356950589450/inventory.png";
-  const zero =
-    "https://cdn.discordapp.com/attachments/1110128243220172833/1113388569214582805/0.png";
-  const one =
-    "https://cdn.discordapp.com/attachments/1110128243220172833/1113388569512398908/01.png";
-  const two =
-    "https://cdn.discordapp.com/attachments/1110128243220172833/1113388569768239187/02.png";
-  const three =
-    "https://cdn.discordapp.com/attachments/1110128243220172833/1113388570028277801/03.png";
-  const four =
-    "https://cdn.discordapp.com/attachments/1110128243220172833/1113388570279956571/04.png";
-  const five =
-    "https://cdn.discordapp.com/attachments/1110128243220172833/1113388570556768306/05.png";
-  const six =
-    "https://cdn.discordapp.com/attachments/1110128243220172833/1113388570955218944/06.png";
-  const seven =
-    "https://cdn.discordapp.com/attachments/1110128243220172833/1113388571219480586/07.png";
-  const eight =
-    "https://cdn.discordapp.com/attachments/1110128243220172833/1113388571492098068/08.png";
-  const nine =
-    "https://cdn.discordapp.com/attachments/1110128243220172833/1113388571777302548/09.png";
-
+  const base = inventoryBaseUrl;
   // console.log(number);
 
   const degit3 = Math.floor(number / 100);
@@ -36,34 +27,34 @@ async function inventoryImageMaker(number) {
     let image;
     switch (number) {
       case 1:
-        image = one;
+        image = oneUrl;
         break;
       case 2:
-        image = two;
+        image = twoUrl;
         break;
       case 3:
-        image = three;
+        image = threeUrl;
         break;
       case 4:
-        image = four;
+        image = fourUrl;
         break;
       case 5:
-        image = five;
+        image = fiveUrl;
         break;
       case 6:
-        image = six;
+        image = sixUrl;
         break;
       case 7:
-        image = seven;
+        image = sevenUrl;
         break;
       case 8:
-        image = eight;
+        image = eightUrl;
         break;
       case 9:
-        image = nine;
+        image = nineUrl;
         break;
       default:
-        image = zero;
+        image = zeroUrl;
         break;
     }
     return image;

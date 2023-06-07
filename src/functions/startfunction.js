@@ -5,20 +5,78 @@ const { Pagination } = require("pagination.djs");
 async function startfunction(interaction) {
   const userDoc = db.collection("users").doc(interaction.user.id);
   const snapshot = await userDoc.get();
-  const farmDoc = userDoc.collection("farm").doc();
-  const inventoryDoc = userDoc.collection("inventory").doc();
+  const crop1Doc = userDoc.collection("farm").doc("crop1");
+  const crop2Doc = userDoc.collection("farm").doc("crop2");
+  const crop3Doc = userDoc.collection("farm").doc("crop3");
+  const crop4Doc = userDoc.collection("farm").doc("crop4");
+  const crop5Doc = userDoc.collection("farm").doc("crop5");
+  const crop6Doc = userDoc.collection("farm").doc("crop6");
+  const crop7Doc = userDoc.collection("farm").doc("crop7");
+  const crop8Doc = userDoc.collection("farm").doc("crop8");
+  const crop9Doc = userDoc.collection("farm").doc("crop9");
+  const seed1Doc = userDoc.collection("inventory").doc("seed1");
+  const seed2Doc = userDoc.collection("inventory").doc("seed2");
+  const harvested1Doc = userDoc.collection("inventory").doc("harvested1");
+  const harvested2Doc = userDoc.collection("inventory").doc("harvested2");
 
   // If it exists, return a message
   if (snapshot.exists) {
     interaction.reply("u r already start! type 'bly game'");
   } else {
-    interaction.reply("b");
     // Set the user's data with the new index
     await userDoc.set({
       discordId: interaction.user.id,
       lastLogin: new Date(),
       exp: 0,
       gold: 0,
+    });
+    await crop1Doc.set({
+      type: 0,
+      createdAt: new Date(),
+    });
+    await crop2Doc.set({
+      type: 0,
+      createdAt: new Date(),
+    });
+    await crop3Doc.set({
+      type: 0,
+      createdAt: new Date(),
+    });
+    await crop4Doc.set({
+      type: 0,
+      createdAt: new Date(),
+    });
+    await crop5Doc.set({
+      type: 0,
+      createdAt: new Date(),
+    });
+    await crop6Doc.set({
+      type: 0,
+      createdAt: new Date(),
+    });
+    await crop7Doc.set({
+      type: 0,
+      createdAt: new Date(),
+    });
+    await crop8Doc.set({
+      type: 0,
+      createdAt: new Date(),
+    });
+    await crop9Doc.set({
+      type: 0,
+      createdAt: new Date(),
+    });
+    await seed1Doc.set({
+      number: 0,
+    });
+    await seed2Doc.set({
+      number: 0,
+    });
+    await harvested1Doc.set({
+      number: 0,
+    });
+    await harvested2Doc.set({
+      number: 0,
     });
 
     const imageUrl1 =

@@ -1,14 +1,10 @@
 const { AttachmentBuilder } = require("discord.js");
 const Canvas = require("@napi-rs/canvas");
+const { farmBaseUrl } = require(__dirname + "/../assets/bases");
 
 async function farmImageMaker(type, time) {
   let status = "";
-  const base =
-    "https://cdn.discordapp.com/attachments/1110128243220172833/1113010845258096680/3x3.png";
-  // const base =
-  //   "https://cdn.discordapp.com/attachments/1110128243220172833/1110398686569177208/Sprite-0001-non.png";
-  // const assets =
-  //   "https://cdn.discordapp.com/attachments/1110128243220172833/1110398742508605440/assets_3232.png";
+  const base = farmBaseUrl;
   const seed =
     "https://cdn.discordapp.com/attachments/1110128243220172833/1110478589809401886/seed.png";
   const sprout =
