@@ -27,8 +27,8 @@ async function startfunction(interaction) {
     await userDoc.set({
       discordId: interaction.user.id,
       lastLogin: new Date(),
-      exp: 0,
-      gold: 0,
+      // exp: 0,
+      gold: 100,
     });
     await crop1Doc.set({
       type: 0,

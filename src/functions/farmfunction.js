@@ -10,7 +10,7 @@ async function farmfunction(interaction) {
     interaction.reply(message);
   } catch (e) {
     console.log(e);
-    shopfunction(interaction, "send");
+    interaction.channel.send(e);
   }
 
   const collector = interaction.channel.createMessageComponentCollector({});
@@ -32,33 +32,61 @@ async function farmfunction(interaction) {
           invenfunction(interaction, "editReply");
         }
         break;
-      case "item1":
-        const userRef = db.collection("users").doc(interaction.user.id);
-        const userData = (await userRef.get()).data();
-        const cropRef1 = userRef.collection("myFarm").doc("crop1");
-        console.log("-----before-----");
-        console.log(userData.gold);
-        userRef.update({ gold: userData.gold - 1 });
-        cropRef1.set({
-          type: 1,
-          createAt: new Date(),
-        });
-        setTimeout(async () => {
-          const newUserRef = db.collection("users").doc(interaction.user.id);
-          const newUserData = (await newUserRef.get()).data();
-          console.log("-----after-----");
-          console.log(newUserData.gold);
-        }, 1000);
+      case "seed1":
+        const userRef1 = db.collection("users").doc(interaction.user.id);
+        const userData1 = (await userRef1.get()).data();
+        const userGold1 = userData1.gold;
+        if (userGold1 < 1) {
+          console.log("not enough gold");
+        } else {
+          console.log("-----before-----");
+          console.log(userGold1);
+          userRef1.update({ gold: userGold1 - 1 });
+          const seed1Ref = userRef1.collection("inventory").doc("seed1");
+          const seedNumber = (await seed1Ref.get()).data().number;
+          seed1Ref.set({
+            number: seedNumber + 1,
+          });
+          setTimeout(async () => {
+            const newUserRef = db.collection("users").doc(interaction.user.id);
+            const newUserData = (await newUserRef.get()).data();
+            console.log("-----after-----");
+            console.log(newUserData.gold);
+          }, 1000);
+        }
+        break;
+      case "seed2":
+        const userRef2 = db.collection("users").doc(interaction.user.id);
+        const userData2 = (await userRef2.get()).data();
+        const userGold3 = userData2.gold;
+        if (userGold3 < 2) {
+          console.log("not enough gold");
+        } else {
+          console.log("-----before-----");
+          console.log(userGold3);
+          userRef2.update({ gold: userGold3 - 2 });
+          const seed2Ref = userRef2.collection("inventory").doc("seed2");
+          const seedNumber = (await seed2Ref.get()).data().number;
+          seed2Ref.set({
+            number: seedNumber + 1,
+          });
+          setTimeout(async () => {
+            const newUserRef = db.collection("users").doc(interaction.user.id);
+            const newUserData = (await newUserRef.get()).data();
+            console.log("-----after-----");
+            console.log(newUserData.gold);
+          }, 1000);
+        }
         break;
       case "refresh":
         refreshFarm(interaction);
         break;
       case "harvest":
-        const userRef1 = db.collection("users").doc(interaction.user.id);
-        const cropRef = userRef1.collection("myFarm").doc("crop1");
+        const userRef3 = db.collection("users").doc(interaction.user.id);
+        const cropRef = userRef3.collection("myFarm").doc("crop1");
         const cropDoc = await cropRef.get();
         const cropData = cropDoc.data();
-        const invenRef = userRef1.collection("myInven").doc("inven1");
+        const invenRef = userRef3.collection("myInven").doc("inven1");
         const invenDoc = await invenRef.get();
         const invenData = invenDoc.data();
         const time = cropData?.createAt?._seconds;

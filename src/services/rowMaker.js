@@ -34,14 +34,36 @@ function rowMaker(location) {
     return [locationMenuRow, farmButtonRow];
   } else if (location === "shop") {
     const shopButtonRow = new ActionRowBuilder().addComponents(
-      new ButtonBuilder().setCustomId("item1").setLabel("Item 1").setStyle(1),
-      new ButtonBuilder().setCustomId("item2").setLabel("Item 2").setStyle(1),
-      new ButtonBuilder().setCustomId("item3").setLabel("Item 3").setStyle(1),
-      new ButtonBuilder().setCustomId("item4").setLabel("Item 4").setStyle(1)
+      new ButtonBuilder()
+        .setCustomId("seed1")
+        .setLabel("buy carrot")
+        .setStyle(1),
+      new ButtonBuilder()
+        .setCustomId("seed2")
+        .setLabel("buy pumpkin")
+        .setStyle(1)
     );
     return [locationMenuRow, shopButtonRow];
   } else if (location === "inventory") {
-    return [locationMenuRow];
+    const invenButtonRow = new ActionRowBuilder().addComponents(
+      new ButtonBuilder()
+        .setCustomId("plant1")
+        .setLabel("plant carrot")
+        .setStyle(1),
+      new ButtonBuilder()
+        .setCustomId("plant2")
+        .setLabel("plant pumpkin")
+        .setStyle(1),
+      new ButtonBuilder()
+        .setCustomId("sell1")
+        .setLabel("sell carrot")
+        .setStyle(1),
+      new ButtonBuilder()
+        .setCustomId("sell2")
+        .setLabel("sell pumpkin")
+        .setStyle(1)
+    );
+    return [locationMenuRow, invenButtonRow];
   }
 }
 
