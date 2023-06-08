@@ -61,7 +61,7 @@ client.on("messageCreate", async (interaction) => {
   const splittedMessages = interaction.content.split(" ");
   if (splittedMessages[0] === "a") {
     const command = splittedMessages[1];
-    const arg = splittedMessages.slice(2);
+    // const arg = splittedMessages.slice(2);
     if (command === "a") {
       farmfunction(interaction);
     }

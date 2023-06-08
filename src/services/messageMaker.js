@@ -77,15 +77,23 @@ async function inventoryMessageMaker(interaction) {
   const userData = (await userRef.get()).data();
   const title = `${user.username}'s inventory`;
   const content = `💰 ${userData.gold}`;
-  const inventoryRef = userRef.collection("myInven").doc("inven1");
-  const inventoryData = (await inventoryRef.get()).data();
-  const itemType = inventoryData?.type;
-  const itemNumber = inventoryData?.number;
-  const attachment = await inventoryImageMaker(itemNumber);
+  const seed1Ref = userRef.collection("inventory").doc("seed1");
+  const seed1Number = (await seed1Ref.get()).data().number;
+  const seed2Ref = userRef.collection("inventory").doc("seed2");
+  const seed2Number = (await seed2Ref.get()).data().number;
+  const harvested1Ref = userRef.collection("inventory").doc("harvested1");
+  const harvested1Number = (await harvested1Ref.get()).data().number;
+  const harvested2Ref = userRef.collection("inventory").doc("harvested2");
+  const harvested2Number = (await harvested2Ref.get()).data().number;
+  const attachment = await inventoryImageMaker(
+    seed1Number,
+    seed2Number,
+    harvested1Number,
+    harvested2Number
+  );
 
   const rows = rowMaker("inventory");
   const message = {
-    content: "a",
     embeds: [
       {
         title: title,

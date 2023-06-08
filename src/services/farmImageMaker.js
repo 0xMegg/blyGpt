@@ -1,29 +1,31 @@
 const { AttachmentBuilder } = require("discord.js");
 const Canvas = require("@napi-rs/canvas");
 const { farmBaseUrl } = require(__dirname + "/../assets/bases");
+const {
+  carrotSeedUrl,
+  carrotSproutUrl,
+  carrotCropUrl,
+  pumpkinSeedUrl,
+  pumpkinSproutUrl,
+  pumpkinCropUrl,
+} = require(__dirname + "/../assets/crops");
 
 async function farmImageMaker(type, time) {
   let status = "";
   const base = farmBaseUrl;
-  const seed =
-    "https://cdn.discordapp.com/attachments/1110128243220172833/1110478589809401886/seed.png";
-  const sprout =
-    "https://cdn.discordapp.com/attachments/1110128243220172833/1110478589255753728/sprout.png";
-  const carrot =
-    "https://cdn.discordapp.com/attachments/1110128243220172833/1110478589490643025/carrot.png";
 
   if (type === 1) {
     const now = new Date().getTime() / 1000;
     const gap = now - time;
     console.log(gap);
     if (gap <= 10) {
-      status = seed;
+      status = carrotSeedUrl;
       console.log("seed");
     } else if (gap <= 20) {
-      status = sprout;
+      status = carrotSproutUrl;
       console.log("sprout");
     } else {
-      status = carrot;
+      status = carrotCropUrl;
       console.log("carrot");
     }
   } else if (type === 2) {
