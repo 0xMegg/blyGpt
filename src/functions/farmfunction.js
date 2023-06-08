@@ -54,17 +54,18 @@ async function farmfunction(interaction) {
             console.log(newUserData.gold);
           }, 1000);
         }
+        shopfunction(interaction, "editReply");
         break;
       case "seed2":
         const userRef2 = db.collection("users").doc(interaction.user.id);
         const userData2 = (await userRef2.get()).data();
-        const userGold3 = userData2.gold;
-        if (userGold3 < 2) {
+        const userGold2 = userData2.gold;
+        if (userGold2 < 2) {
           console.log("not enough gold");
         } else {
           console.log("-----before-----");
-          console.log(userGold3);
-          userRef2.update({ gold: userGold3 - 2 });
+          console.log(userGold2);
+          userRef2.update({ gold: userGold2 - 2 });
           const seed2Ref = userRef2.collection("inventory").doc("seed2");
           const seedNumber = (await seed2Ref.get()).data().number;
           seed2Ref.set({
@@ -77,6 +78,7 @@ async function farmfunction(interaction) {
             console.log(newUserData.gold);
           }, 1000);
         }
+        shopfunction(interaction, "editReply");
         break;
       case "refresh":
         refreshFarm(interaction);
@@ -115,6 +117,117 @@ async function farmfunction(interaction) {
         }
         setTimeout(() => refreshFarm(interaction), 1000);
 
+        break;
+      case "plant1":
+        const userRef4 = db.collection("users").doc(interaction.user.id);
+        const seed1Ref = userRef4.collection("inventory").doc("seed1");
+        const seed1Number = (await seed1Ref.get()).data().number;
+        const crop1Ref = userRef4.collection("farm").doc("crop1");
+        const crop1Type = (await crop1Ref.get()).data().type;
+        const crop2Ref = userRef4.collection("farm").doc("crop2");
+        const crop2Type = (await crop2Ref.get()).data().type;
+        const crop3Ref = userRef4.collection("farm").doc("crop3");
+        const crop3Type = (await crop3Ref.get()).data().type;
+        const crop4Ref = userRef4.collection("farm").doc("crop4");
+        const crop4Type = (await crop4Ref.get()).data().type;
+        const crop5Ref = userRef4.collection("farm").doc("crop5");
+        const crop5Type = (await crop5Ref.get()).data().type;
+        const crop6Ref = userRef4.collection("farm").doc("crop6");
+        const crop6Type = (await crop6Ref.get()).data().type;
+        const crop7Ref = userRef4.collection("farm").doc("crop7");
+        const crop7Type = (await crop7Ref.get()).data().type;
+        const crop8Ref = userRef4.collection("farm").doc("crop8");
+        const crop8Type = (await crop8Ref.get()).data().type;
+        const crop9Ref = userRef4.collection("farm").doc("crop9");
+        const crop9Type = (await crop9Ref.get()).data().type;
+        if (seed1Number > 0) {
+          if (crop1Type === 0) {
+            seed1Ref.update({
+              number: seed1Number - 1,
+            });
+            crop1Ref.update({
+              type: 1,
+              createdAt: new Date(),
+            });
+            invenfunction(interaction, "editReply");
+          } else if (crop2Type === 0) {
+            seed1Ref.update({
+              number: seed1Number - 1,
+            });
+            crop2Ref.update({
+              type: 1,
+              createdAt: new Date(),
+            });
+            invenfunction(interaction, "editReply");
+          } else if (crop3Type === 0) {
+            seed1Ref.update({
+              number: seed1Number - 1,
+            });
+            crop3Ref.update({
+              type: 1,
+              createdAt: new Date(),
+            });
+            invenfunction(interaction, "editReply");
+          } else if (crop4Type === 0) {
+            seed1Ref.update({
+              number: seed1Number - 1,
+            });
+            crop4Ref.update({
+              type: 1,
+              createdAt: new Date(),
+            });
+            invenfunction(interaction, "editReply");
+          } else if (crop5Type === 0) {
+            seed1Ref.update({
+              number: seed1Number - 1,
+            });
+            crop5Ref.update({
+              type: 1,
+              createdAt: new Date(),
+            });
+            invenfunction(interaction, "editReply");
+          } else if (crop6Type === 0) {
+            seed1Ref.update({
+              number: seed1Number - 1,
+            });
+            crop6Ref.update({
+              type: 1,
+              createdAt: new Date(),
+            });
+            invenfunction(interaction, "editReply");
+          } else if (crop7Type === 0) {
+            seed1Ref.update({
+              number: seed1Number - 1,
+            });
+            crop7Ref.update({
+              type: 1,
+              createdAt: new Date(),
+            });
+            invenfunction(interaction, "editReply");
+          } else if (crop8Type === 0) {
+            seed1Ref.update({
+              number: seed1Number - 1,
+            });
+            crop8Ref.update({
+              type: 1,
+              createdAt: new Date(),
+            });
+            invenfunction(interaction, "editReply");
+          } else if (crop9Type === 0) {
+            seed1Ref.update({
+              number: seed1Number - 1,
+            });
+            crop9Ref.update({
+              type: 1,
+              createdAt: new Date(),
+            });
+            invenfunction(interaction, "editReply");
+          } else {
+            console.log("no place to plant");
+          }
+        } else {
+          console.log("no seed to plant");
+        }
         break;
       default:
         interaction.channel.send(`${interaction.customId} 미구현 기능입니다`);
