@@ -39,6 +39,11 @@ async function farmMessageMaker(interaction, userType) {
         type: data.type,
         time: new Date().getTime() / 1000 - data.createdAt._seconds,
       });
+    } else {
+      cropDataArray.push({
+        name: cropName,
+        type: 0,
+      });
     }
   }
   console.log(cropDataArray);

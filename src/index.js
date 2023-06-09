@@ -34,7 +34,7 @@ for (const file of commandFiles) {
   client.commands.set(command.data.name, command);
 }
 
-client.once("ready", () => {
+client.once("ready", async () => {
   console.log("Ready!");
   console.log(`Logged in as ${client.user.tag}!`);
 });
