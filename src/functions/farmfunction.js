@@ -54,16 +54,16 @@ async function farmfunction(interaction) {
       }
       shopfunction(interaction, "editReply");
     } else if (interaction.customId === "seed2") {
-      const userRef2 = db.collection("users").doc(interaction.user.id);
-      const userData2 = (await userRef2.get()).data();
-      const userGold2 = userData2.gold;
-      if (userGold2 < 2) {
+      const userRef = db.collection("users").doc(interaction.user.id);
+      const userData = (await userRef.get()).data();
+      const userGold = userData.gold;
+      if (userGold < 2) {
         console.log("not enough gold");
       } else {
         console.log("-----before-----");
-        console.log(userGold2);
-        userRef2.update({ gold: userGold2 - 2 });
-        const seed2Ref = userRef2.collection("inventory").doc("seed2");
+        console.log(userGold);
+        userRef.update({ gold: userGold - 2 });
+        const seed2Ref = userRef.collection("inventory").doc("seed2");
         const seedNumber = (await seed2Ref.get()).data().number;
         seed2Ref.set({
           number: seedNumber + 1,
@@ -79,59 +79,80 @@ async function farmfunction(interaction) {
     } else if (interaction.customId === "refresh") {
       refreshFarm(interaction);
     } else if (interaction.customId === "harvest") {
-      const userRef3 = db.collection("users").doc(interaction.user.id);
-      const cropRef = userRef3.collection("farm").doc("crop1");
-      const cropDoc = await cropRef.get();
-      const cropData = cropDoc.data();
-      const invenRef = userRef3.collection("myInven").doc("inven1");
-      const invenDoc = await invenRef.get();
-      const invenData = invenDoc.data();
-      const time = cropData?.createAt?._seconds;
-      const type = cropData?.type;
-
-      const now = new Date().getTime() / 1000;
-      const gap = now - time;
-      if (gap > 20) {
-        console.log("ready to harvest");
-        cropRef.delete();
-        const cropNumber = invenData.number;
-        if (cropRef.exists) {
-          invenRef.update({
-            type: "plant1",
-            number: cropNumber + 1,
-          });
-        } else {
-          invenRef.set({
-            type: "plant1",
-            number: cropNumber + 1,
-          });
-        }
-        console.log("harvested");
-      } else {
-        console.log("not ready");
-      }
-      setTimeout(() => refreshFarm(interaction), 1000);
-    } else if (interaction.customId === "plant1") {
-      const userRef4 = db.collection("users").doc(interaction.user.id);
-      const seed1Ref = userRef4.collection("inventory").doc("seed1");
+      const userRef = db.collection("users").doc(interaction.user.id);
+      const seed1Ref = userRef.collection("inventory").doc("seed1");
       const seed1Number = (await seed1Ref.get()).data().number;
-      const crop1Ref = userRef4.collection("farm").doc("crop1");
+      const crop1Ref = userRef.collection("farm").doc("crop1");
       const crop1Type = (await crop1Ref.get()).data().type;
-      const crop2Ref = userRef4.collection("farm").doc("crop2");
+      const crop2Ref = userRef.collection("farm").doc("crop2");
       const crop2Type = (await crop2Ref.get()).data().type;
-      const crop3Ref = userRef4.collection("farm").doc("crop3");
+      const crop3Ref = userRef.collection("farm").doc("crop3");
       const crop3Type = (await crop3Ref.get()).data().type;
-      const crop4Ref = userRef4.collection("farm").doc("crop4");
+      const crop4Ref = userRef.collection("farm").doc("crop4");
       const crop4Type = (await crop4Ref.get()).data().type;
-      const crop5Ref = userRef4.collection("farm").doc("crop5");
+      const crop5Ref = userRef.collection("farm").doc("crop5");
       const crop5Type = (await crop5Ref.get()).data().type;
-      const crop6Ref = userRef4.collection("farm").doc("crop6");
+      const crop6Ref = userRef.collection("farm").doc("crop6");
       const crop6Type = (await crop6Ref.get()).data().type;
-      const crop7Ref = userRef4.collection("farm").doc("crop7");
+      const crop7Ref = userRef.collection("farm").doc("crop7");
       const crop7Type = (await crop7Ref.get()).data().type;
-      const crop8Ref = userRef4.collection("farm").doc("crop8");
+      const crop8Ref = userRef.collection("farm").doc("crop8");
       const crop8Type = (await crop8Ref.get()).data().type;
-      const crop9Ref = userRef4.collection("farm").doc("crop9");
+      const crop9Ref = userRef.collection("farm").doc("crop9");
+      const crop9Type = (await crop9Ref.get()).data().type;
+      // const userRef = db.collection("users").doc(interaction.user.id);
+      // const cropRef = userRef.collection("farm").doc("crop1");
+      // const cropDoc = await cropRef.get();
+      // const cropData = cropDoc.data();
+      // const invenRef = userRef.collection("myInven").doc("inven1");
+      // const invenDoc = await invenRef.get();
+      // const invenData = invenDoc.data();
+      // const time = cropData?.createAt?._seconds;
+      // const type = cropData?.type;
+
+      // const now = new Date().getTime() / 1000;
+      // const gap = now - time;
+      // if (gap > 20) {
+      //   console.log("ready to harvest");
+      //   cropRef.delete();
+      //   const cropNumber = invenData.number;
+      //   if (cropRef.exists) {
+      //     invenRef.update({
+      //       type: "plant1",
+      //       number: cropNumber + 1,
+      //     });
+      //   } else {
+      //     invenRef.set({
+      //       type: "plant1",
+      //       number: cropNumber + 1,
+      //     });
+      //   }
+      //   console.log("harvested");
+      // } else {
+      //   console.log("not ready");
+      // }
+      // setTimeout(() => refreshFarm(interaction), 1000);
+    } else if (interaction.customId === "plant1") {
+      const userRef = db.collection("users").doc(interaction.user.id);
+      const seed1Ref = userRef.collection("inventory").doc("seed1");
+      const seed1Number = (await seed1Ref.get()).data().number;
+      const crop1Ref = userRef.collection("farm").doc("crop1");
+      const crop1Type = (await crop1Ref.get()).data().type;
+      const crop2Ref = userRef.collection("farm").doc("crop2");
+      const crop2Type = (await crop2Ref.get()).data().type;
+      const crop3Ref = userRef.collection("farm").doc("crop3");
+      const crop3Type = (await crop3Ref.get()).data().type;
+      const crop4Ref = userRef.collection("farm").doc("crop4");
+      const crop4Type = (await crop4Ref.get()).data().type;
+      const crop5Ref = userRef.collection("farm").doc("crop5");
+      const crop5Type = (await crop5Ref.get()).data().type;
+      const crop6Ref = userRef.collection("farm").doc("crop6");
+      const crop6Type = (await crop6Ref.get()).data().type;
+      const crop7Ref = userRef.collection("farm").doc("crop7");
+      const crop7Type = (await crop7Ref.get()).data().type;
+      const crop8Ref = userRef.collection("farm").doc("crop8");
+      const crop8Type = (await crop8Ref.get()).data().type;
+      const crop9Ref = userRef.collection("farm").doc("crop9");
       const crop9Type = (await crop9Ref.get()).data().type;
       if (seed1Number > 0) {
         if (crop1Type === 0) {

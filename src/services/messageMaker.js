@@ -11,17 +11,44 @@ async function farmMessageMaker(interaction, userType) {
   } else if (userType === "user") {
     user = interaction.user;
   }
-  const id = user.id;
+
+  const cropNames = [
+    "crop1",
+    "crop2",
+    "crop3",
+    "crop4",
+    "crop5",
+    "crop6",
+    "crop7",
+    "crop8",
+    "crop9",
+  ];
+  let cropDataArray = [];
+
+  for (cropName of cropNames) {
+    const collection = db
+      .collection("users")
+      .doc(user.id)
+      .collection("farm")
+      .doc(cropName);
+    const snapshot = await collection.get();
+    const data = snapshot.data();
+    if (data.type && data.createdAt) {
+      cropDataArray.push({
+        name: cropName,
+        type: data.type,
+        time: new Date().getTime() / 1000 - data.createdAt._seconds,
+      });
+    }
+  }
+  console.log(cropDataArray);
+
   const userRef = db.collection("users").doc(user.id);
   const userData = (await userRef.get()).data();
-  const cropRef = userRef.collection("myFarm").doc("crop1");
-  const cropData = (await cropRef.get()).data();
-  const time = cropData?.createAt?._seconds;
-  const type = cropData?.type;
   const title = `${user.username}'s farm`;
   const content = `💰 ${userData.gold}`;
 
-  const attachment = await farmImageMaker(type, time);
+  const attachment = await farmImageMaker(cropDataArray);
   const rows = rowMaker("farm");
   const message = {
     content: "",
