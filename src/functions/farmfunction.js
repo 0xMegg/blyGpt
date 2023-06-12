@@ -112,50 +112,28 @@ async function farmfunction(interaction) {
               const harvested1Number = (await harvested1Ref.get()).data()
                 .number;
               harvested1Ref.update({ number: harvested1Number + 1 });
-              refreshFarm(interaction);
             } else {
               console.log(`${cropName} / ${data.type} / ${time} / not ready`);
             }
           } else if (data.type === 2) {
             if (time > 20) {
               console.log(`${cropName} / ${data.type} / ${time} / ready`);
+              collection.update({ type: 0 });
+              const harvested2Ref = db
+                .collection("users")
+                .doc(interaction.user.id)
+                .collection("inventory")
+                .doc("harvested2");
+              const harvested2Number = (await harvested2Ref.get()).data()
+                .number;
+              harvested2Ref.update({ number: harvested2Number + 1 });
             } else {
               console.log(`${cropName} / ${data.type} / ${time} / not ready`);
             }
           }
         }
       }
-      // const userRef = db.collection("users").doc(interaction.user.id);
-      // const cropRef = userRef.collection("farm").doc("crop1");
-      // const cropDoc = await cropRef.get();
-      // const cropData = cropDoc.data();
-      // const invenRef = userRef.collection("myInven").doc("inven1");
-      // const invenDoc = await invenRef.get();
-      // const invenData = invenDoc.data();
-      // const time = cropData?.createAt?._seconds;
-      // const type = cropData?.type;
-      // const now = new Date().getTime() / 1000;
-      // const gap = now - time;
-      // if (gap > 20) {
-      //   console.log("ready to harvest");
-      //   cropRef.delete();
-      //   const cropNumber = invenData.number;
-      //   if (cropRef.exists) {
-      //     invenRef.update({
-      //       type: "plant1",
-      //       number: cropNumber + 1,
-      //     });
-      //   } else {
-      //     invenRef.set({
-      //       type: "plant1",
-      //       number: cropNumber + 1,
-      //     });
-      //   }
-      //   console.log("harvested");
-      // } else {
-      //   console.log("not ready");
-      // }
-      // setTimeout(() => refreshFarm(interaction), 1000);
+      refreshFarm(interaction);
     } else if (interaction.customId === "plant1") {
       const userRef = db.collection("users").doc(interaction.user.id);
       const seed1Ref = userRef.collection("inventory").doc("seed1");
@@ -257,6 +235,116 @@ async function farmfunction(interaction) {
           });
           crop9Ref.update({
             type: 1,
+            createdAt: new Date(),
+          });
+          setTimeout(() => invenfunction(interaction, "editReply"), 1000);
+        } else {
+          console.log("no place to plant");
+        }
+      } else {
+        console.log("no seed to plant");
+      }
+    } else if (interaction.customId === "plant2") {
+      const userRef = db.collection("users").doc(interaction.user.id);
+      const seed2Ref = userRef.collection("inventory").doc("seed2");
+      const seed2Number = (await seed2Ref.get()).data().number;
+      const crop1Ref = userRef.collection("farm").doc("crop1");
+      const crop1Type = (await crop1Ref.get()).data().type;
+      const crop2Ref = userRef.collection("farm").doc("crop2");
+      const crop2Type = (await crop2Ref.get()).data().type;
+      const crop3Ref = userRef.collection("farm").doc("crop3");
+      const crop3Type = (await crop3Ref.get()).data().type;
+      const crop4Ref = userRef.collection("farm").doc("crop4");
+      const crop4Type = (await crop4Ref.get()).data().type;
+      const crop5Ref = userRef.collection("farm").doc("crop5");
+      const crop5Type = (await crop5Ref.get()).data().type;
+      const crop6Ref = userRef.collection("farm").doc("crop6");
+      const crop6Type = (await crop6Ref.get()).data().type;
+      const crop7Ref = userRef.collection("farm").doc("crop7");
+      const crop7Type = (await crop7Ref.get()).data().type;
+      const crop8Ref = userRef.collection("farm").doc("crop8");
+      const crop8Type = (await crop8Ref.get()).data().type;
+      const crop9Ref = userRef.collection("farm").doc("crop9");
+      const crop9Type = (await crop9Ref.get()).data().type;
+      if (seed2Number > 0) {
+        if (crop1Type === 0) {
+          seed2Ref.update({
+            number: seed2Number - 1,
+          });
+          crop1Ref.update({
+            type: 2,
+            createdAt: new Date(),
+          });
+          setTimeout(() => invenfunction(interaction, "editReply"), 1000);
+        } else if (crop2Type === 0) {
+          seed2Ref.update({
+            number: seed2Number - 1,
+          });
+          crop2Ref.update({
+            type: 2,
+            createdAt: new Date(),
+          });
+          setTimeout(() => invenfunction(interaction, "editReply"), 1000);
+        } else if (crop3Type === 0) {
+          seed2Ref.update({
+            number: seed2Number - 1,
+          });
+          crop3Ref.update({
+            type: 2,
+            createdAt: new Date(),
+          });
+          setTimeout(() => invenfunction(interaction, "editReply"), 1000);
+        } else if (crop4Type === 0) {
+          seed2Ref.update({
+            number: seed2Number - 1,
+          });
+          crop4Ref.update({
+            type: 2,
+            createdAt: new Date(),
+          });
+          setTimeout(() => invenfunction(interaction, "editReply"), 1000);
+        } else if (crop5Type === 0) {
+          seed2Ref.update({
+            number: seed2Number - 1,
+          });
+          crop5Ref.update({
+            type: 2,
+            createdAt: new Date(),
+          });
+          setTimeout(() => invenfunction(interaction, "editReply"), 1000);
+        } else if (crop6Type === 0) {
+          seed2Ref.update({
+            number: seed2Number - 1,
+          });
+          crop6Ref.update({
+            type: 2,
+            createdAt: new Date(),
+          });
+          setTimeout(() => invenfunction(interaction, "editReply"), 1000);
+        } else if (crop7Type === 0) {
+          seed2Ref.update({
+            number: seed2Number - 1,
+          });
+          crop7Ref.update({
+            type: 2,
+            createdAt: new Date(),
+          });
+          setTimeout(() => invenfunction(interaction, "editReply"), 1000);
+        } else if (crop8Type === 0) {
+          seed2Ref.update({
+            number: seed2Number - 1,
+          });
+          crop8Ref.update({
+            type: 2,
+            createdAt: new Date(),
+          });
+          setTimeout(() => invenfunction(interaction, "editReply"), 1000);
+        } else if (crop9Type === 0) {
+          seed2Ref.update({
+            number: seed2Number - 1,
+          });
+          crop9Ref.update({
+            type: 2,
             createdAt: new Date(),
           });
           setTimeout(() => invenfunction(interaction, "editReply"), 1000);

@@ -35,7 +35,7 @@ async function farmMessageMaker(interaction, userType) {
     const data = snapshot.data();
     if (data.type && data.createdAt) {
       cropDataArray.push({
-        name: cropName,
+        name: snapshot.id,
         type: data.type,
         time: new Date().getTime() / 1000 - data.createdAt._seconds,
       });
