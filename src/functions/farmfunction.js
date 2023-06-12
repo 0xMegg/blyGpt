@@ -3,6 +3,7 @@ const { db } = require(__dirname + "/../fbase");
 const { farmMessageMaker } = require(__dirname + "/../services/messageMaker");
 const shopfunction = require(__dirname + "/shopfunction");
 const invenfunction = require(__dirname + "/invenfunction");
+const getTime = require(__dirname + "/../services/utility");
 
 async function farmfunction(interaction) {
   try {
@@ -31,6 +32,7 @@ async function farmfunction(interaction) {
         invenfunction(interaction, "editReply");
       }
     } else if (interaction.customId === "seed1") {
+      let systemMessage;
       const userRef = db.collection("users").doc(interaction.user.id);
       const userData = (await userRef.get()).data();
       const userGold = userData.gold;
@@ -45,6 +47,7 @@ async function farmfunction(interaction) {
         seed1Ref.set({
           number: seedNumber + 1,
         });
+        systemMessage = `${getTime()} You got Carrot seed with 1 gold`;
         setTimeout(async () => {
           const newUserRef = db.collection("users").doc(interaction.user.id);
           const newUserData = (await newUserRef.get()).data();
@@ -52,7 +55,7 @@ async function farmfunction(interaction) {
           console.log(newUserData.gold);
         }, 1000);
       }
-      shopfunction(interaction, "editReply");
+      shopfunction(interaction, "editReply", systemMessage);
     } else if (interaction.customId === "seed2") {
       const userRef = db.collection("users").doc(interaction.user.id);
       const userData = (await userRef.get()).data();

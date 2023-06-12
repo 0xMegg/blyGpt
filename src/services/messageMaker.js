@@ -64,6 +64,9 @@ async function farmMessageMaker(interaction, userType) {
         image: {
           url: "attachment://myFarm.png",
         },
+        footer: {
+          text: "footer",
+        },
       },
     ],
     files: [attachment],
@@ -73,9 +76,9 @@ async function farmMessageMaker(interaction, userType) {
   return message;
 }
 
-async function shopMessageMaker(interaction) {
+async function shopMessageMaker(interaction, systemMessage) {
   const imageUrl = shopBaseUrl;
-
+  console.log(`shopMessageMaker's system message is ${systemMessage}`);
   const user = interaction.user;
   const id = user.id;
   const userRef = db.collection("users").doc(id);
@@ -92,6 +95,9 @@ async function shopMessageMaker(interaction) {
         description: content,
         image: {
           url: imageUrl,
+        },
+        footer: {
+          text: systemMessage,
         },
       },
     ],
