@@ -30,72 +30,62 @@ async function farmImageMaker(cropDataArray) {
 
   // tempArray = [];
 
-  cropDataArray.forEach(async (data, index) => {
-    if (data.type === 1) {
-      if (data.time > 10) {
+  for (let i = 0; i < cropDataArray.length; i++) {
+    if (cropDataArray[i].type === 1) {
+      if (cropDataArray[i].time > 10) {
         // tempArray.push(carrotCropUrl);
         context.drawImage(
           await Canvas.loadImage(carrotCropUrl),
-          coordinate[index][0],
-          coordinate[index][1],
-          coordinate[index][2],
-          coordinate[index][3]
+          coordinate[i][0],
+          coordinate[i][1],
+          coordinate[i][2],
+          coordinate[i][3]
         );
-      } else if (data.time > 5) {
+      } else if (cropDataArray[i].time > 5) {
         context.drawImage(
           await Canvas.loadImage(carrotSproutUrl),
-          coordinate[index][0],
-          coordinate[index][1],
-          coordinate[index][2],
-          coordinate[index][3]
+          coordinate[i][0],
+          coordinate[i][1],
+          coordinate[i][2],
+          coordinate[i][3]
         );
       } else {
         context.drawImage(
           await Canvas.loadImage(carrotSeedUrl),
-          coordinate[index][0],
-          coordinate[index][1],
-          coordinate[index][2],
-          coordinate[index][3]
+          coordinate[i][0],
+          coordinate[i][1],
+          coordinate[i][2],
+          coordinate[i][3]
         );
       }
-    } else if (data.type === 2) {
-      if (data.time > 20) {
+    } else if (cropDataArray[i].type === 2) {
+      if (cropDataArray[i].time > 20) {
         context.drawImage(
           await Canvas.loadImage(pumpkinCropUrl),
-          coordinate[index][0],
-          coordinate[index][1],
-          coordinate[index][2],
-          coordinate[index][3]
+          coordinate[i][0],
+          coordinate[i][1],
+          coordinate[i][2],
+          coordinate[i][3]
         );
-      } else if (data.time > 10) {
+      } else if (cropDataArray[i].time > 10) {
         context.drawImage(
           await Canvas.loadImage(pumpkinSproutUrl),
-          coordinate[index][0],
-          coordinate[index][1],
-          coordinate[index][2],
-          coordinate[index][3]
+          coordinate[i][0],
+          coordinate[i][1],
+          coordinate[i][2],
+          coordinate[i][3]
         );
       } else {
         context.drawImage(
           await Canvas.loadImage(pumpkinSeedUrl),
-          coordinate[index][0],
-          coordinate[index][1],
-          coordinate[index][2],
-          coordinate[index][3]
+          coordinate[i][0],
+          coordinate[i][1],
+          coordinate[i][2],
+          coordinate[i][3]
         );
       }
     }
-  });
-
-  // for (let i = 0; i < tempArray.length; i++) {
-  //   context.drawImage(
-  //     await Canvas.loadImage(carrotCropUrl),
-  //     coordinate[i][0],
-  //     coordinate[i][1],
-  //     coordinate[i][2],
-  //     coordinate[i][3]
-  //   );
-  // }
+  }
 
   const buffer = await canvas.toBuffer("image/png");
   const attachment = new AttachmentBuilder(buffer, {
