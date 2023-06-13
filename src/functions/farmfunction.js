@@ -57,6 +57,7 @@ async function farmfunction(interaction) {
       }
       shopfunction(interaction, "editReply", systemMessage);
     } else if (interaction.customId === "seed2") {
+      let systemMessage;
       const userRef = db.collection("users").doc(interaction.user.id);
       const userData = (await userRef.get()).data();
       const userGold = userData.gold;
@@ -71,6 +72,7 @@ async function farmfunction(interaction) {
         seed2Ref.set({
           number: seedNumber + 1,
         });
+        systemMessage = `${getTime()} You got Pumpkin seed with 2 gold`;
         setTimeout(async () => {
           const newUserRef = db.collection("users").doc(interaction.user.id);
           const newUserData = (await newUserRef.get()).data();
@@ -78,7 +80,7 @@ async function farmfunction(interaction) {
           console.log(newUserData.gold);
         }, 1000);
       }
-      shopfunction(interaction, "editReply");
+      shopfunction(interaction, "editReply", systemMessage);
     } else if (interaction.customId === "refresh") {
       refreshFarm(interaction);
     } else if (interaction.customId === "harvest") {
