@@ -4,6 +4,7 @@ const { farmMessageMaker } = require(__dirname + "/../services/messageMaker");
 const shopfunction = require(__dirname + "/shopfunction");
 const invenfunction = require(__dirname + "/invenfunction");
 const getTime = require(__dirname + "/../services/utility");
+const sellCrop = require(__dirname + "/../services/sellFunction");
 
 async function farmfunction(interaction) {
   try {
@@ -359,6 +360,10 @@ async function farmfunction(interaction) {
       } else {
         console.log("no seed to plant");
       }
+    } else if (interaction.customId === "sell1") {
+      sellCrop(interaction, "harvested1");
+    } else if (interaction.customId === "sell2") {
+      sellCrop(interaction, "harvested2");
     } else {
       interaction.channel.send(`${interaction.customId} 미구현 기능입니다`);
     }

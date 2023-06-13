@@ -88,7 +88,7 @@ async function shopMessageMaker(interaction, systemMessage) {
 
   const rows = rowMaker("shop");
   const message = {
-    content: "shop",
+    content: "",
     embeds: [
       {
         title: title,
@@ -108,7 +108,7 @@ async function shopMessageMaker(interaction, systemMessage) {
   return message;
 }
 
-async function inventoryMessageMaker(interaction) {
+async function inventoryMessageMaker(interaction, systemMessage) {
   const user = interaction.user;
   const id = user.id;
   const userRef = db.collection("users").doc(id);
@@ -138,6 +138,9 @@ async function inventoryMessageMaker(interaction) {
         description: content,
         image: {
           url: "attachment://myInventory.png",
+        },
+        footer: {
+          text: systemMessage,
         },
       },
     ],
