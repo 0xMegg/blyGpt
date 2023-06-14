@@ -7,7 +7,8 @@ const {
   ComponentType,
 } = require("discord.js");
 const { token } = require(__dirname + "/config.js");
-const farmfunction = require(__dirname + "/functions/farmfunction.js");
+const mainfunction = require(__dirname + "/functions/mainfunction.js");
+const getTime = require(__dirname + "/services/utility");
 
 const client = new Client({
   intents: [
@@ -35,7 +36,7 @@ for (const file of commandFiles) {
 }
 
 client.once("ready", async () => {
-  console.log("Ready!");
+  console.log(`${getTime()}Ready!`);
   console.log(`Logged in as ${client.user.tag}!`);
 });
 
@@ -63,7 +64,7 @@ client.on("messageCreate", async (interaction) => {
     const command = splittedMessages[1];
     // const arg = splittedMessages.slice(2);
     if (command === "a") {
-      farmfunction(interaction);
+      mainfunction(interaction);
     }
   }
 });
