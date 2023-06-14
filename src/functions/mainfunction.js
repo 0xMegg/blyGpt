@@ -5,6 +5,7 @@ const shopfunction = require(__dirname + "/shopfunction");
 const invenfunction = require(__dirname + "/invenfunction");
 const getTime = require(__dirname + "/../services/utility");
 const sellCrop = require(__dirname + "/../services/sellFunction");
+const cook = require(__dirname + "/../services/cookFunction");
 
 async function mainfunction(interaction) {
   farmfunction(interaction, "main");
@@ -134,13 +135,13 @@ async function mainfunction(interaction) {
         }
       }
       if (harvestedCrop1Number !== 0 && harvestedCrop2Number !== 0) {
-        systemMessage = `${harvestedCrop1Number} carrots, ${harvestedCrop2Number} pumpkins harvested`;
+        systemMessage = `${getTime()} ${harvestedCrop1Number} carrots, ${harvestedCrop2Number} pumpkins harvested`;
       } else if (harvestedCrop1Number === 0 && harvestedCrop2Number !== 0) {
-        systemMessage = `${harvestedCrop2Number} pumpkins harvested`;
+        systemMessage = `${getTime()} ${harvestedCrop2Number} pumpkins harvested`;
       } else if (harvestedCrop1Number !== 0 && harvestedCrop2Number === 0) {
-        systemMessage = `${harvestedCrop1Number} carrots harvested`;
+        systemMessage = `${getTime()} ${harvestedCrop1Number} carrots harvested`;
       } else {
-        systemMessage = `nothing to harvest :(`;
+        systemMessage = `${getTime()} nothing to harvest :(`;
       }
       console.log(
         `${harvestedCrop1Number}, ${harvestedCrop2Number}, ${systemMessage}`
@@ -444,6 +445,8 @@ async function mainfunction(interaction) {
       sellCrop(interaction, "harvested1");
     } else if (interaction.customId === "sell2") {
       sellCrop(interaction, "harvested2");
+    } else if (interaction.customId === "cook") {
+      cook(interaction);
     } else {
       interaction.channel.send(`${interaction.customId} 미구현 기능입니다`);
     }

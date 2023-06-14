@@ -18,6 +18,7 @@ async function startfunction(interaction) {
   const seed2Doc = userDoc.collection("inventory").doc("seed2");
   const harvested1Doc = userDoc.collection("inventory").doc("harvested1");
   const harvested2Doc = userDoc.collection("inventory").doc("harvested2");
+  const dishDoc = userDoc.collection("inventory").doc("dish");
 
   // If it exists, return a message
   if (snapshot.exists) {
@@ -76,6 +77,9 @@ async function startfunction(interaction) {
       number: 0,
     });
     await harvested2Doc.set({
+      number: 0,
+    });
+    await dishDoc.set({
       number: 0,
     });
 

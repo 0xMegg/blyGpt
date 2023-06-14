@@ -61,7 +61,8 @@ function rowMaker(location) {
       new ButtonBuilder()
         .setCustomId("sell2")
         .setLabel("sell pumpkin")
-        .setStyle(1)
+        .setStyle(1),
+      new ButtonBuilder().setCustomId("cook").setLabel("cook dish").setStyle(1)
     );
     return [locationMenuRow, invenButtonRow];
   }
