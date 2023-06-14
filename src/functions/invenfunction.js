@@ -6,7 +6,7 @@ async function invenfunction(interaction, messageType, systemMessage) {
   if (messageType === "send") {
     interaction.channel.send(message);
   } else if (messageType === "editReply") {
-    interaction.editReply(message);
+    interaction.editReply(message, systemMessage);
   } else {
     interaction.reply(message);
   }
