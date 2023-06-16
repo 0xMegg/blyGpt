@@ -17,6 +17,7 @@ const {
   carrotCropUrl,
   pumpkinSeedUrl,
   pumpkinCropUrl,
+  whopperUrl,
 } = require(__dirname + "/../assets/crops");
 const { inventoryBaseUrl } = require(__dirname + "/../assets/bases");
 
@@ -24,7 +25,8 @@ async function inventoryImageMaker(
   seed1Number,
   seed2Number,
   harvested1Number,
-  harvested2Number
+  harvested2Number,
+  dishNumber
 ) {
   const canvas = Canvas.createCanvas(400, 400);
   const context = canvas.getContext("2d");
@@ -32,117 +34,147 @@ async function inventoryImageMaker(
   const seed2NumberImageArray = getImageArrayByNumber(seed2Number);
   const harvested1NumberImageArray = getImageArrayByNumber(harvested1Number);
   const harvested2NumberImageArray = getImageArrayByNumber(harvested2Number);
+  const dishNumberImageArray = getImageArrayByNumber(dishNumber);
 
   context.drawImage(await Canvas.loadImage(inventoryBaseUrl), 0, 0, 400, 400);
-  //carrot seed
-  context.drawImage(await Canvas.loadImage(carrotSeedUrl), 98, 91, 32, 32);
-  context.drawImage(
-    await Canvas.loadImage(seed1NumberImageArray[0]),
-    71,
-    145,
-    20,
-    20
-  );
-  context.drawImage(
-    await Canvas.loadImage(seed1NumberImageArray[1]),
-    71 + 33,
-    145,
-    20,
-    20
-  );
-  context.drawImage(
-    await Canvas.loadImage(seed1NumberImageArray[2]),
-    71 + 33 + 33,
-    145,
-    20,
-    20
-  );
-  //pumpkin seed
-  context.drawImage(
-    await Canvas.loadImage(pumpkinSeedUrl),
-    98 + 172,
-    91,
-    32,
-    32
-  );
-  context.drawImage(
-    await Canvas.loadImage(seed2NumberImageArray[0]),
-    71 + 172,
-    145,
-    20,
-    20
-  );
-  context.drawImage(
-    await Canvas.loadImage(seed2NumberImageArray[1]),
-    71 + 172 + 33,
-    145,
-    20,
-    20
-  );
-  context.drawImage(
-    await Canvas.loadImage(seed2NumberImageArray[2]),
-    71 + 172 + 33 + 33,
-    145,
-    20,
-    20
-  );
   //carrot
-  context.drawImage(
-    await Canvas.loadImage(carrotCropUrl),
-    98,
-    91 + 172,
-    32,
-    32
-  );
+  context.drawImage(await Canvas.loadImage(carrotCropUrl), 100, 73, 32, 32);
   context.drawImage(
     await Canvas.loadImage(harvested1NumberImageArray[0]),
-    71,
-    145 + 172,
-    20,
-    20
+    108 - 10,
+    112,
+    14,
+    14
   );
   context.drawImage(
     await Canvas.loadImage(harvested1NumberImageArray[1]),
-    71 + 33,
-    145 + 172,
-    20,
-    20
+    108,
+    112,
+    14,
+    14
   );
   context.drawImage(
     await Canvas.loadImage(harvested1NumberImageArray[2]),
-    71 + 33 + 33,
-    145 + 172,
-    20,
-    20
+    108 + 10,
+    112,
+    14,
+    14
   );
   //pumpkin
   context.drawImage(
     await Canvas.loadImage(pumpkinCropUrl),
-    98 + 172,
-    91 + 172,
+    100 + 168,
+    73,
     32,
     32
   );
   context.drawImage(
     await Canvas.loadImage(harvested2NumberImageArray[0]),
-    71 + 172,
-    145 + 172,
-    20,
-    20
+    108 + 168 - 10,
+    112,
+    14,
+    14
   );
   context.drawImage(
     await Canvas.loadImage(harvested2NumberImageArray[1]),
-    71 + 172 + 33,
-    145 + 172,
-    20,
-    20
+    108 + 168,
+    112,
+    14,
+    14
   );
   context.drawImage(
     await Canvas.loadImage(harvested2NumberImageArray[2]),
-    71 + 172 + 33 + 33,
-    145 + 172,
-    20,
-    20
+    108 + 168 + 10,
+    112,
+    14,
+    14
+  );
+  //carrot seed
+  context.drawImage(
+    await Canvas.loadImage(carrotSeedUrl),
+    100,
+    73 + 111,
+    32,
+    32
+  );
+  context.drawImage(
+    await Canvas.loadImage(seed1NumberImageArray[0]),
+    108 - 10,
+    112 + 111,
+    14,
+    14
+  );
+  context.drawImage(
+    await Canvas.loadImage(seed1NumberImageArray[1]),
+    108,
+    112 + 111,
+    14,
+    14
+  );
+  context.drawImage(
+    await Canvas.loadImage(seed1NumberImageArray[2]),
+    108 + 10,
+    112 + 111,
+    14,
+    14
+  );
+  //pumpkin seed
+  context.drawImage(
+    await Canvas.loadImage(pumpkinSeedUrl),
+    100 + 168,
+    73 + 111,
+    32,
+    32
+  );
+  context.drawImage(
+    await Canvas.loadImage(seed2NumberImageArray[0]),
+    108 + 168 - 10,
+    112 + 111,
+    14,
+    14
+  );
+  context.drawImage(
+    await Canvas.loadImage(seed2NumberImageArray[1]),
+    108 + 168,
+    112 + 111,
+    14,
+    14
+  );
+  context.drawImage(
+    await Canvas.loadImage(seed2NumberImageArray[2]),
+    108 + 168 + 10,
+    112 + 111,
+    14,
+    14
+  );
+  //dish
+  context.drawImage(
+    await Canvas.loadImage(whopperUrl),
+    100,
+    73 + 111 + 111,
+    32,
+    32
+  );
+  context.drawImage(
+    await Canvas.loadImage(dishNumberImageArray[0]),
+    108 - 10,
+    112 + 111 + 111,
+    14,
+    14
+  );
+  context.drawImage(
+    await Canvas.loadImage(dishNumberImageArray[1]),
+    108,
+    112 + 111 + 111,
+    14,
+    14
+  );
+  context.drawImage(
+    await Canvas.loadImage(dishNumberImageArray[2]),
+    108 + 10,
+    112 + 111 + 111,
+    14,
+    14
   );
 
   const buffer = await canvas.toBuffer("image/png");

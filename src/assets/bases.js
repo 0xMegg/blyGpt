@@ -1,8 +1,8 @@
 module.exports = {
   farmBaseUrl:
-    "https://cdn.discordapp.com/attachments/1110128243220172833/1115901612939022346/farm.png",
+    "https://cdn.discordapp.com/attachments/1110128243220172833/1119148296578015263/farmV3.png",
   shopBaseUrl:
-    "https://cdn.discordapp.com/attachments/1110128243220172833/1115905489453195284/shop.png",
+    "https://cdn.discordapp.com/attachments/1110128243220172833/1119139727698829422/shopV4.png",
   inventoryBaseUrl:
-    "https://cdn.discordapp.com/attachments/1110128243220172833/1115905489193140294/inventory.png",
+    "https://cdn.discordapp.com/attachments/1110128243220172833/1119088310929870968/inventoryV4.png",
 };

@@ -11,4 +11,6 @@ module.exports = {
     "https://cdn.discordapp.com/attachments/1110128243220172833/1116186423364698252/pumpkinSprout.png",
   pumpkinCropUrl:
     "https://cdn.discordapp.com/attachments/1110128243220172833/1116186422752333844/pumpkinCrop.png",
+  whopperUrl:
+    "https://cdn.discordapp.com/attachments/1110128243220172833/1118775667581014107/whopper.png",
 };

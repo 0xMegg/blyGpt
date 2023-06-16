@@ -162,11 +162,14 @@ async function inventoryMessageMaker(interaction, systemMessage) {
   const harvested1Number = (await harvested1Ref.get()).data().number;
   const harvested2Ref = userRef.collection("inventory").doc("harvested2");
   const harvested2Number = (await harvested2Ref.get()).data().number;
+  const dishRef = userRef.collection("inventory").doc("dish");
+  const dishNumber = (await dishRef.get()).data().number;
   const attachment = await inventoryImageMaker(
     seed1Number,
     seed2Number,
     harvested1Number,
-    harvested2Number
+    harvested2Number,
+    dishNumber
   );
 
   const rows = rowMaker("inventory");
