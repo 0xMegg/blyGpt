@@ -7,6 +7,13 @@ const getTime = require("../services/utility");
 const sellCrop = require("../services/sellFunction");
 const cook = require("../services/cookFunction");
 
+const {
+  crop1Name,
+  crop1buyingCost,
+  crop2Name,
+  crop2buyingCost,
+} = require("../config");
+
 async function mainfunction(interaction) {
   farmfunction(interaction, "main");
 
@@ -38,7 +45,7 @@ async function mainfunction(interaction) {
         seed1Ref.set({
           number: seedNumber + 1,
         });
-        systemMessage = `${getTime()} You got Carrot seed with 1 gold`;
+        systemMessage = `${getTime()} You got ${crop1Name} seed with ${crop1buyingCost} gold`;
         setTimeout(async () => {
           const newUserRef = db.collection("users").doc(interaction.user.id);
           const newUserData = (await newUserRef.get()).data();
@@ -63,7 +70,7 @@ async function mainfunction(interaction) {
         seed2Ref.set({
           number: seedNumber + 1,
         });
-        systemMessage = `${getTime()} You got Pumpkin seed with 2 gold`;
+        systemMessage = `${getTime()} You got ${crop2Name} seed with ${crop2buyingCost} gold`;
         setTimeout(async () => {
           const newUserRef = db.collection("users").doc(interaction.user.id);
           const newUserData = (await newUserRef.get()).data();
@@ -135,11 +142,11 @@ async function mainfunction(interaction) {
         }
       }
       if (harvestedCrop1Number !== 0 && harvestedCrop2Number !== 0) {
-        systemMessage = `${getTime()} ${harvestedCrop1Number} carrots, ${harvestedCrop2Number} pumpkins harvested`;
+        systemMessage = `${getTime()} ${harvestedCrop1Number} ${crop1Name}s, ${harvestedCrop2Number} ${crop2Name}s harvested`;
       } else if (harvestedCrop1Number === 0 && harvestedCrop2Number !== 0) {
-        systemMessage = `${getTime()} ${harvestedCrop2Number} pumpkins harvested`;
+        systemMessage = `${getTime()} ${harvestedCrop2Number} ${crop2Name}s harvested`;
       } else if (harvestedCrop1Number !== 0 && harvestedCrop2Number === 0) {
-        systemMessage = `${getTime()} ${harvestedCrop1Number} carrots harvested`;
+        systemMessage = `${getTime()} ${harvestedCrop1Number} ${crop1Name}s harvested`;
       } else {
         systemMessage = `${getTime()} nothing to harvest :(`;
       }
@@ -179,7 +186,7 @@ async function mainfunction(interaction) {
             type: 1,
             createdAt: new Date(),
           });
-          systemMessage = `${getTime()} Carrot is planted at 1`;
+          systemMessage = `${getTime()} ${crop1Name} is planted at 1`;
           setTimeout(
             () => invenfunction(interaction, "editReply", systemMessage),
             1000
@@ -192,7 +199,7 @@ async function mainfunction(interaction) {
             type: 1,
             createdAt: new Date(),
           });
-          systemMessage = `${getTime()} Carrot is planted at 2`;
+          systemMessage = `${getTime()} ${crop1Name} is planted at 2`;
           setTimeout(
             () => invenfunction(interaction, "editReply", systemMessage),
             1000
@@ -205,7 +212,7 @@ async function mainfunction(interaction) {
             type: 1,
             createdAt: new Date(),
           });
-          systemMessage = `${getTime()} Carrot is planted at 3`;
+          systemMessage = `${getTime()} ${crop1Name} is planted at 3`;
           setTimeout(
             () => invenfunction(interaction, "editReply", systemMessage),
             1000
@@ -218,7 +225,7 @@ async function mainfunction(interaction) {
             type: 1,
             createdAt: new Date(),
           });
-          systemMessage = `${getTime()} Carrot is planted at 4`;
+          systemMessage = `${getTime()} ${crop1Name} is planted at 4`;
           setTimeout(
             () => invenfunction(interaction, "editReply", systemMessage),
             1000
@@ -231,7 +238,7 @@ async function mainfunction(interaction) {
             type: 1,
             createdAt: new Date(),
           });
-          systemMessage = `${getTime()} Carrot is planted at 5`;
+          systemMessage = `${getTime()} ${crop1Name} is planted at 5`;
           setTimeout(
             () => invenfunction(interaction, "editReply", systemMessage),
             1000
@@ -244,7 +251,7 @@ async function mainfunction(interaction) {
             type: 1,
             createdAt: new Date(),
           });
-          systemMessage = `${getTime()} Carrot is planted at 6`;
+          systemMessage = `${getTime()} ${crop1Name} is planted at 6`;
           setTimeout(
             () => invenfunction(interaction, "editReply", systemMessage),
             1000
@@ -257,7 +264,7 @@ async function mainfunction(interaction) {
             type: 1,
             createdAt: new Date(),
           });
-          systemMessage = `${getTime()} Carrot is planted at 7`;
+          systemMessage = `${getTime()} ${crop1Name} is planted at 7`;
           setTimeout(
             () => invenfunction(interaction, "editReply", systemMessage),
             1000
@@ -270,7 +277,7 @@ async function mainfunction(interaction) {
             type: 1,
             createdAt: new Date(),
           });
-          systemMessage = `${getTime()} Carrot is planted at 8`;
+          systemMessage = `${getTime()} ${crop1Name} is planted at 8`;
           setTimeout(
             () => invenfunction(interaction, "editReply", systemMessage),
             1000
@@ -283,7 +290,7 @@ async function mainfunction(interaction) {
             type: 1,
             createdAt: new Date(),
           });
-          systemMessage = `${getTime()} Carrot is planted at 9`;
+          systemMessage = `${getTime()} ${crop1Name} is planted at 9`;
           setTimeout(
             () => invenfunction(interaction, "editReply", systemMessage),
             1000
@@ -326,7 +333,7 @@ async function mainfunction(interaction) {
             type: 2,
             createdAt: new Date(),
           });
-          systemMessage = `${getTime()} Pumpkin is planted at 1`;
+          systemMessage = `${getTime()} ${crop2Name} is planted at 1`;
           setTimeout(
             () => invenfunction(interaction, "editReply", systemMessage),
             1000
@@ -339,7 +346,7 @@ async function mainfunction(interaction) {
             type: 2,
             createdAt: new Date(),
           });
-          systemMessage = `${getTime()} Pumpkin is planted at 2`;
+          systemMessage = `${getTime()} ${crop2Name} is planted at 2`;
           setTimeout(
             () => invenfunction(interaction, "editReply", systemMessage),
             1000
@@ -352,7 +359,7 @@ async function mainfunction(interaction) {
             type: 2,
             createdAt: new Date(),
           });
-          systemMessage = `${getTime()} Pumpkin is planted at 3`;
+          systemMessage = `${getTime()} ${crop2Name} is planted at 3`;
           setTimeout(
             () => invenfunction(interaction, "editReply", systemMessage),
             1000
@@ -365,7 +372,7 @@ async function mainfunction(interaction) {
             type: 2,
             createdAt: new Date(),
           });
-          systemMessage = `${getTime()} Pumpkin is planted at 4`;
+          systemMessage = `${getTime()} ${crop2Name} is planted at 4`;
           setTimeout(
             () => invenfunction(interaction, "editReply", systemMessage),
             1000
@@ -378,7 +385,7 @@ async function mainfunction(interaction) {
             type: 2,
             createdAt: new Date(),
           });
-          systemMessage = `${getTime()} Pumpkin is planted at 5`;
+          systemMessage = `${getTime()} ${crop2Name} is planted at 5`;
           setTimeout(
             () => invenfunction(interaction, "editReply", systemMessage),
             1000
@@ -391,7 +398,7 @@ async function mainfunction(interaction) {
             type: 2,
             createdAt: new Date(),
           });
-          systemMessage = `${getTime()} Pumpkin is planted at 6`;
+          systemMessage = `${getTime()} ${crop2Name} is planted at 6`;
           setTimeout(
             () => invenfunction(interaction, "editReply", systemMessage),
             1000
@@ -404,7 +411,7 @@ async function mainfunction(interaction) {
             type: 2,
             createdAt: new Date(),
           });
-          systemMessage = `${getTime()} Pumpkin is planted at 7`;
+          systemMessage = `${getTime()} ${crop2Name} is planted at 7`;
           setTimeout(
             () => invenfunction(interaction, "editReply", systemMessage),
             1000
@@ -417,7 +424,7 @@ async function mainfunction(interaction) {
             type: 2,
             createdAt: new Date(),
           });
-          systemMessage = `${getTime()} Pumpkin is planted at 8`;
+          systemMessage = `${getTime()} ${crop2Name} is planted at 8`;
           setTimeout(
             () => invenfunction(interaction, "editReply", systemMessage),
             1000
@@ -430,7 +437,7 @@ async function mainfunction(interaction) {
             type: 2,
             createdAt: new Date(),
           });
-          systemMessage = `${getTime()} Pumpkin is planted at 9`;
+          systemMessage = `${getTime()} ${crop2Name} is planted at 9`;
           setTimeout(
             () => invenfunction(interaction, "editReply", systemMessage),
             1000

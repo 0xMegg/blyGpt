@@ -2,6 +2,13 @@ const { db } = require("../fbase");
 const invenfunction = require("../functions/invenfunction");
 const getTime = require("../services/utility");
 
+const {
+  crop1Name,
+  crop1SellingCost,
+  crop2Name,
+  crop2SellingCost,
+} = require("../config");
+
 async function sellCrop(interaction, cropType) {
   let systemMessage;
   const userRef = db.collection("users").doc(interaction.user.id);
@@ -13,14 +20,14 @@ async function sellCrop(interaction, cropType) {
       const userData = (await userRef.get()).data();
       const userGold = userData.gold;
       harvestedRef.update({ number: harvestedNumber - 1 });
-      userRef.update({ gold: userGold + 1 });
-      systemMessage = `${getTime()} You sell a Carrot by 1 Gold`;
+      userRef.update({ gold: userGold + crop1SellingCost });
+      systemMessage = `${getTime()} You sell a ${crop1Name} by ${crop1SellingCost} Gold`;
     } else if (cropType === "harvested2") {
       const userData = (await userRef.get()).data();
       const userGold = userData.gold;
       harvestedRef.update({ number: harvestedNumber - 1 });
-      userRef.update({ gold: userGold + 2 });
-      systemMessage = `${getTime()} You sell a Pumpkin by 2 Gold`;
+      userRef.update({ gold: userGold + crop2SellingCost });
+      systemMessage = `${getTime()} You sell a ${crop2Name} by ${crop2SellingCost} Gold`;
     }
   } else {
     systemMessage = `${getTime} no crops to sell`;

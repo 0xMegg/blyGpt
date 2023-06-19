@@ -8,19 +8,5 @@ async function farmfunction(interaction, type, systemMessage) {
     const message = await farmMessageMaker(interaction, type, systemMessage);
     interaction.editReply(message);
   }
-
-  // async function refreshFarm(
-  //   interaction,
-  //   harvestedCrop1Number,
-  //   harvestedCrop2Number
-  // ) {
-  //   const message = await farmMessageMaker(
-  //     interaction,
-  //     "refresh",
-  //     harvestedCrop1Number,
-  //     harvestedCrop2Number
-  //   );
-  //   interaction.editReply(message);
-  // }
 }
 module.exports = farmfunction;

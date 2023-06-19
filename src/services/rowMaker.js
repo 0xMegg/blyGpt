@@ -4,6 +4,7 @@ const {
   StringSelectMenuBuilder,
   StringSelectMenuOptionBuilder,
 } = require("discord.js");
+const { crop1Name, crop2Name } = require("../config");
 
 function rowMaker(location) {
   const locationMenuRow = new ActionRowBuilder().addComponents(
@@ -36,11 +37,11 @@ function rowMaker(location) {
     const shopButtonRow = new ActionRowBuilder().addComponents(
       new ButtonBuilder()
         .setCustomId("seed1")
-        .setLabel("buy carrot")
+        .setLabel(`buy ${crop1Name}`)
         .setStyle(1),
       new ButtonBuilder()
         .setCustomId("seed2")
-        .setLabel("buy pumpkin")
+        .setLabel(`buy ${crop2n}`)
         .setStyle(1)
     );
     return [locationMenuRow, shopButtonRow];
@@ -48,19 +49,19 @@ function rowMaker(location) {
     const invenButtonRow = new ActionRowBuilder().addComponents(
       new ButtonBuilder()
         .setCustomId("plant1")
-        .setLabel("plant carrot")
+        .setLabel(`plant ${crop1Name}`)
         .setStyle(1),
       new ButtonBuilder()
         .setCustomId("plant2")
-        .setLabel("plant pumpkin")
+        .setLabel(`plant ${crop2Name}`)
         .setStyle(1),
       new ButtonBuilder()
         .setCustomId("sell1")
-        .setLabel("sell carrot")
+        .setLabel(`sell ${crop1Name}`)
         .setStyle(1),
       new ButtonBuilder()
         .setCustomId("sell2")
-        .setLabel("sell pumpkin")
+        .setLabel(`sell ${crop2Name}`)
         .setStyle(1),
       new ButtonBuilder().setCustomId("cook").setLabel("cook dish").setStyle(1)
     );

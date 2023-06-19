@@ -13,44 +13,6 @@ async function farmMessageMaker(interaction, type, systemMessage) {
     user = interaction.user;
   }
 
-  // if (interaction.author) {
-  //   console.log(1);
-  //   user = interaction.author;
-  // } else if (interaction.user) {
-  //   console.log(2);
-  //   user = interaction.user;
-  // }
-
-  // if (messageType === "author") {
-  //   user = interaction.author;
-  //   if (harvestedCrop1Number === 0 || harvestedCrop2Number === 0) {
-  //     systemMessage = `nothing to harvest`;
-  //   } else if (harvestedCrop1Number !== 0 || harvestedCrop2Number === 0) {
-  //     systemMessage = `${harvestedCrop1Number} carrots harvested`;
-  //   } else if (harvestedCrop1Number === 0 || harvestedCrop2Number !== 0) {
-  //     systemMessage = `${harvestedCrop2Number} pumpkins harvested`;
-  //   } else {
-  //     systemMessage = `${harvestedCrop1Number} carrots, ${harvestedCrop2Number} pumpkins harvested`;
-  //   }
-  // } else if (messageType === "user") {
-  //   user = interaction.user;
-  //   if (harvestedCrop1Number === 0 || harvestedCrop2Number === 0) {
-  //     systemMessage = `nothing to harvest`;
-  //   } else if (harvestedCrop1Number !== 0 || harvestedCrop2Number === 0) {
-  //     systemMessage = `${harvestedCrop1Number} carrots harvested`;
-  //   } else if (harvestedCrop1Number === 0 || harvestedCrop2Number !== 0) {
-  //     systemMessage = `${harvestedCrop2Number} pumpkins harvested`;
-  //   } else {
-  //     systemMessage = `${harvestedCrop1Number} carrots, ${harvestedCrop2Number} pumpkins harvested`;
-  //   }
-  // } else if (messageType === "first") {
-  //   user = interaction.author;
-  //   systemMessage = "";
-  // } else if (messageType === "refresh") {
-  //   user = interaction.user;
-  //   systemMessage = "";
-  // }
-
   const cropNames = [
     "crop1",
     "crop2",

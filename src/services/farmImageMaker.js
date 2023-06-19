@@ -10,6 +10,12 @@ const {
   pumpkinSproutUrl,
   pumpkinCropUrl,
 } = require("../assets/crops");
+const {
+  crop1SeedTime,
+  crop1SproutTime,
+  crop2SeedTime,
+  crop2SproutTime,
+} = require("../config");
 
 async function farmImageMaker(cropDataArray) {
   const canvas = Canvas.createCanvas(400, 400);
@@ -31,8 +37,7 @@ async function farmImageMaker(cropDataArray) {
 
   for (let i = 0; i < cropDataArray.length; i++) {
     if (cropDataArray[i].type === 1) {
-      if (cropDataArray[i].time > 10) {
-        // tempArray.push(carrotCropUrl);
+      if (cropDataArray[i].time > crop1SproutTime) {
         context.drawImage(
           await Canvas.loadImage(carrotCropUrl),
           coordinate[i][0],
@@ -40,7 +45,7 @@ async function farmImageMaker(cropDataArray) {
           coordinate[i][2],
           coordinate[i][3]
         );
-      } else if (cropDataArray[i].time > 5) {
+      } else if (cropDataArray[i].time > crop1SeedTime) {
         context.drawImage(
           await Canvas.loadImage(carrotSproutUrl),
           coordinate[i][0],
@@ -58,7 +63,7 @@ async function farmImageMaker(cropDataArray) {
         );
       }
     } else if (cropDataArray[i].type === 2) {
-      if (cropDataArray[i].time > 20) {
+      if (cropDataArray[i].time > crop2SproutTime) {
         context.drawImage(
           await Canvas.loadImage(pumpkinCropUrl),
           coordinate[i][0],
@@ -66,7 +71,7 @@ async function farmImageMaker(cropDataArray) {
           coordinate[i][2],
           coordinate[i][3]
         );
-      } else if (cropDataArray[i].time > 10) {
+      } else if (cropDataArray[i].time > crop2SeedTime) {
         context.drawImage(
           await Canvas.loadImage(pumpkinSproutUrl),
           coordinate[i][0],
