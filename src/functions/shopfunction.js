@@ -1,4 +1,4 @@
-const { shopMessageMaker } = require(__dirname + "/../services/messageMaker");
+const { shopMessageMaker } = require("../services/messageMaker");
 
 async function shopfunction(interaction, messageType, systemMessage) {
   const message = await shopMessageMaker(interaction, systemMessage);

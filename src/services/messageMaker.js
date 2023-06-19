@@ -1,8 +1,8 @@
-const { db } = require(__dirname + "/../fbase");
-const farmImageMaker = require(__dirname + "/farmImageMaker");
-const inventoryImageMaker = require(__dirname + "/inventoryImageMaker");
-const rowMaker = require(__dirname + "/rowMaker");
-const { shopBaseUrl } = require(__dirname + "/../assets/bases");
+const { db } = require("../fbase");
+const farmImageMaker = require("./farmImageMaker");
+const inventoryImageMaker = require("./inventoryImageMaker");
+const rowMaker = require("./rowMaker");
+const { shopBaseUrl } = require("../assets/bases");
 
 async function farmMessageMaker(interaction, type, systemMessage) {
   // console.log(interaction);

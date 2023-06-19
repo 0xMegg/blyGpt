@@ -11,15 +11,15 @@ const {
   sevenUrl,
   eightUrl,
   nineUrl,
-} = require(__dirname + "/../assets/numbers");
+} = require("../assets/numbers");
 const {
   carrotSeedUrl,
   carrotCropUrl,
   pumpkinSeedUrl,
   pumpkinCropUrl,
   whopperUrl,
-} = require(__dirname + "/../assets/crops");
-const { inventoryBaseUrl } = require(__dirname + "/../assets/bases");
+} = require("../assets/crops");
+const { inventoryBaseUrl } = require("../assets/bases");
 
 async function inventoryImageMaker(
   seed1Number,

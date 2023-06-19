@@ -1,4 +1,4 @@
-const { farmMessageMaker } = require(__dirname + "/../services/messageMaker");
+const { farmMessageMaker } = require("../services/messageMaker");
 
 async function farmfunction(interaction, type, systemMessage) {
   if (type === "main") {

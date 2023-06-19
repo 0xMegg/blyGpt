@@ -6,9 +6,9 @@ const {
   GatewayIntentBits,
   ComponentType,
 } = require("discord.js");
-const { token } = require(__dirname + "/config.js");
-const mainfunction = require(__dirname + "/functions/mainfunction.js");
-const getTime = require(__dirname + "/services/utility");
+const { token } = require("./config.js");
+const mainfunction = require("./functions/mainfunction.js");
+const getTime = require("./services/utility");
 
 const client = new Client({
   intents: [

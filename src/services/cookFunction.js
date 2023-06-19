@@ -1,6 +1,6 @@
-const { db } = require(__dirname + "/../fbase");
-const invenfunction = require(__dirname + "/../functions/invenfunction");
-const getTime = require(__dirname + "/../services/utility");
+const { db } = require("../fbase");
+const invenfunction = require("../functions/invenfunction");
+const getTime = require("../services/utility");
 
 async function cook(interaction) {
   let systemMessage = `not enough to cook`;

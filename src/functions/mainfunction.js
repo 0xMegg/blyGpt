@@ -1,11 +1,11 @@
-const { db } = require(__dirname + "/../fbase");
+const { db } = require("../fbase");
 
-const farmfunction = require(__dirname + "/farmfunction");
-const shopfunction = require(__dirname + "/shopfunction");
-const invenfunction = require(__dirname + "/invenfunction");
-const getTime = require(__dirname + "/../services/utility");
-const sellCrop = require(__dirname + "/../services/sellFunction");
-const cook = require(__dirname + "/../services/cookFunction");
+const farmfunction = require("./farmfunction");
+const shopfunction = require("./shopfunction");
+const invenfunction = require("./invenfunction");
+const getTime = require("../services/utility");
+const sellCrop = require("../services/sellFunction");
+const cook = require("../services/cookFunction");
 
 async function mainfunction(interaction) {
   farmfunction(interaction, "main");
