@@ -68,7 +68,7 @@ client.on("messageCreate", async (interaction) => {
     if (command === "a") {
       mainfunction(interaction);
     } else if (command === "start") {
-      startfunction(interaction, 0);
+      startfunction(interaction);
     } else if (command === "end") {
       endfunction(interaction);
     } else if (command === "help") {

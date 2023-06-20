@@ -41,7 +41,7 @@ function rowMaker(location) {
         .setStyle(1),
       new ButtonBuilder()
         .setCustomId("seed2")
-        .setLabel(`buy ${crop2n}`)
+        .setLabel(`buy ${crop2Name}`)
         .setStyle(1)
     );
     return [locationMenuRow, shopButtonRow];

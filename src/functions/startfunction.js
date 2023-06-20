@@ -1,11 +1,5 @@
-const { db, storage } = require("../fbase");
-const {
-  EmbedBuilder,
-  ButtonStyle,
-  ActionRowBuilder,
-  ButtonBuilder,
-} = require("discord.js");
-const { Pagination } = require("pagination.djs");
+const { db } = require("../fbase");
+const { EmbedBuilder, ActionRowBuilder, ButtonBuilder } = require("discord.js");
 
 async function startfunction(interaction) {
   const userDoc = db.collection("users").doc(interaction.author.id);
@@ -164,6 +158,7 @@ async function startPage(interaction, page) {
           description: "Now you are farmer",
         },
       ],
+      components: [],
     };
     interaction.editReply(message);
   }
