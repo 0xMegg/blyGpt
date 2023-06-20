@@ -8,6 +8,8 @@ const {
 } = require("discord.js");
 const { token } = require("./config.js");
 const mainfunction = require("./functions/mainfunction.js");
+const startfunction = require("./functions/startfunction.js");
+const endfunction = require("./functions/endfunction.js");
 const getTime = require("./services/utility");
 
 const client = new Client({
@@ -21,19 +23,19 @@ const client = new Client({
   ],
 });
 
-client.commands = new Collection();
-const commandsPath = path.join(__dirname, "commands");
-const commandFiles = fs
-  .readdirSync(commandsPath)
-  .filter((file) => file.endsWith(".js"));
+// client.commands = new Collection();
+// const commandsPath = path.join(__dirname, "commands");
+// const commandFiles = fs
+//   .readdirSync(commandsPath)
+//   .filter((file) => file.endsWith(".js"));
 
-for (const file of commandFiles) {
-  const filePath = path.join(commandsPath, file);
-  const command = require(filePath);
-  // Set a new item in the Collection
-  // With the key as the command name and the value as the exported module
-  client.commands.set(command.data.name, command);
-}
+// for (const file of commandFiles) {
+//   const filePath = path.join(commandsPath, file);
+//   const command = require(filePath);
+//   // Set a new item in the Collection
+//   // With the key as the command name and the value as the exported module
+//   client.commands.set(command.data.name, command);
+// }
 
 client.once("ready", async () => {
   console.log(`${getTime()}Ready!`);
@@ -65,6 +67,11 @@ client.on("messageCreate", async (interaction) => {
     // const arg = splittedMessages.slice(2);
     if (command === "a") {
       mainfunction(interaction);
+    } else if (command === "start") {
+      startfunction(interaction, 0);
+    } else if (command === "end") {
+      endfunction(interaction);
+    } else if (command === "help") {
     }
   }
 });

@@ -1,5 +1,7 @@
 require("dotenv").config();
 
+const gameName = "BLY";
+
 const crop1Name = "Carrot";
 const crop1SeedTime = 10;
 const crop1SproutTime = 10;
@@ -16,6 +18,7 @@ module.exports = {
   token: process.env.DISCORD_TOKEN,
   clientId: process.env.CLIENT_ID,
   prefix: "!",
+  gameName,
   crop1Name,
   crop1SeedTime,
   crop1SproutTime,
