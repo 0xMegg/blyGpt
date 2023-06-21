@@ -22,7 +22,6 @@
     "firebase": "^9.22.0",
     "firebase-admin": "^11.8.0",
     "fs": "^0.0.1-security",
-    "nodemon": "^2.0.22",
-    "pagination.djs": "^4.0.9"
+    "nodemon": "^2.0.22"
   }
 }

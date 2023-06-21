@@ -5,7 +5,6 @@ const {
   ActionRowBuilder,
   ButtonBuilder,
 } = require("discord.js");
-const { Pagination } = require("pagination.djs");
 const { gameName } = require("../config");
 
 async function endfunction(interaction) {

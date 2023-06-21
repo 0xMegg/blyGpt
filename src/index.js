@@ -10,6 +10,7 @@ const { token } = require("./config.js");
 const mainfunction = require("./functions/mainfunction.js");
 const startfunction = require("./functions/startfunction.js");
 const endfunction = require("./functions/endfunction.js");
+const helpfunction = require("./functions/helpfunction.js");
 const getTime = require("./services/utility");
 
 const client = new Client({
@@ -72,6 +73,7 @@ client.on("messageCreate", async (interaction) => {
     } else if (command === "end") {
       endfunction(interaction);
     } else if (command === "help") {
+      helpfunction(interaction);
     }
   }
 });

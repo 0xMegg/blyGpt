@@ -1,99 +1,149 @@
 const { db } = require("../fbase");
-const { EmbedBuilder, ButtonStyle } = require("discord.js");
-const { Pagination } = require("pagination.djs");
-const { gameName } = require("../config");
+const {
+  EmbedBuilder,
+  ButtonStyle,
+  ActionRowBuilder,
+  ButtonBuilder,
+} = require("discord.js");
+const { gameName, dishName } = require("../config");
 
-async function helpfunction(interaction) {
-  const userDoc = db.collection("users").doc(interaction.author.id);
-  const snapshot = await userDoc.get();
-  const crop1Doc = userDoc.collection("farm").doc("crop1");
-  const crop2Doc = userDoc.collection("farm").doc("crop2");
-  const crop3Doc = userDoc.collection("farm").doc("crop3");
-  const crop4Doc = userDoc.collection("farm").doc("crop4");
-  const crop5Doc = userDoc.collection("farm").doc("crop5");
-  const crop6Doc = userDoc.collection("farm").doc("crop6");
-  const crop7Doc = userDoc.collection("farm").doc("crop7");
-  const crop8Doc = userDoc.collection("farm").doc("crop8");
-  const crop9Doc = userDoc.collection("farm").doc("crop9");
-  const seed1Doc = userDoc.collection("inventory").doc("seed1");
-  const seed2Doc = userDoc.collection("inventory").doc("seed2");
-  const harvested1Doc = userDoc.collection("inventory").doc("harvested1");
-  const harvested2Doc = userDoc.collection("inventory").doc("harvested2");
-  const dishDoc = userDoc.collection("inventory").doc("dish");
+async function endfunction(interaction) {
+  helpPage(interaction, "main");
+  const collector = interaction.channel.createMessageComponentCollector({});
 
-  // If it exists, return a message
-  if (!snapshot.exists) {
-    interaction.reply(`아직 ${gameName}을 시작하지 않으셨습니다`);
-    console.log(1);
-  } else {
-    console.log(2);
-    const embed11 = {
+  collector.on("collect", async (interaction) => {
+    await interaction.deferUpdate();
+    helpPage(interaction, interaction.customId);
+  });
+}
+
+async function helpPage(interaction, page) {
+  if (page === "main") {
+    const row = new ActionRowBuilder().addComponents(
+      new ButtonBuilder()
+        .setCustomId("disabled")
+        .setLabel("<")
+        .setStyle(1)
+        .setDisabled(true),
+      new ButtonBuilder().setCustomId("second").setLabel(">").setStyle(1)
+    );
+    const embed = {
       content: "",
       embeds: [
         {
-          title: `${gameName} 그만두기`,
-          description: `아래 버튼을 누르면 지금까지 ${gameName}에서 생성된 모든 데이터는 지워지고, 돌이킬 수 없습니다.`,
+          title: `${gameName} 가이드`,
+          description: `${gameName}는 구매한 씨앗을 작물로 성장시켜 판매해서 차익을 얻거나, 여러 작물로 요리를 만드는 디스코드 게임입니다`,
+          footer: {
+            text: "1/5",
+          },
         },
       ],
+      components: [row],
     };
-    interaction.reply(embed11);
-
-    //   const imageUrl1 =
-    //     "https://cdn.discordapp.com/attachments/1110128243220172833/1111544677829705781/Q_800.jpeg";
-    //   const imageUrl2 =
-    //     "https://cdn.discordapp.com/attachments/1110128243220172833/1111544677427056670/NewJeans_theMEGASTUDY.jpg";
-    //   const imageUrl3 =
-    //     "https://cdn.discordapp.com/attachments/1110128243220172833/1111544677087330416/maxresdefault.jpg";
-    //   // Create a new embed
-    //   const embed1 = new EmbedBuilder()
-    //     .setTitle("Welcome1")
-    //     .setThumbnail(imageUrl1)
-    //     .setDescription("상세설명")
-    //     .addFields({
-    //       name: "빌리야에 온걸 환영해",
-    //       value: "빌리야는 어쩌구 저쩌구",
-    //     });
-    //   const embed2 = new EmbedBuilder()
-    //     .setTitle("Welcome2")
-    //     .setThumbnail(imageUrl2)
-    //     .setDescription("너의 정보는 어쩌구 저쩌구");
-    //   const embed3 = new EmbedBuilder()
-    //     .setTitle("Welcome3")
-    //     .setThumbnail(imageUrl3)
-    //     .setDescription("가입");
-    //   // .addFields({
-    //   //   name: "",
-    //   //   value: "[클릭](http://www.google.com)",
-    //   // });
-    //   const embeds = [embed1, embed2, embed3];
-
-    //   const pagination = new Pagination(interaction);
-    //   pagination.setButtonAppearance({
-    //     first: {
-    //       label: "처음으로",
-    //       emoji: "",
-    //       style: ButtonStyle.PRIMARY,
-    //     },
-    //     prev: {
-    //       label: "",
-    //       emoji: "◀️",
-    //       style: ButtonStyle.SECONDARY,
-    //     },
-    //     next: {
-    //       label: "",
-    //       emoji: "▶️",
-    //       style: ButtonStyle.SUCCESS,
-    //     },
-    //     last: {
-    //       label: "마지막으로",
-    //       emoji: "",
-    //       style: ButtonStyle.DANGER,
-    //     },
-    //   });
-
-    //   pagination.setEmbeds(embeds);
-    //   pagination.render();
+    interaction.reply(embed);
+  } else if (page === "first") {
+    const row = new ActionRowBuilder().addComponents(
+      new ButtonBuilder()
+        .setCustomId("disabled")
+        .setLabel("<")
+        .setStyle(1)
+        .setDisabled(true),
+      new ButtonBuilder().setCustomId("second").setLabel(">").setStyle(1)
+    );
+    const embed = {
+      content: "",
+      embeds: [
+        {
+          title: `${gameName} 가이드`,
+          description: `${gameName}는 구매한 씨앗을 작물로 성장시켜 판매해서 차익을 얻거나, 여러 작물로 요리를 만드는 디스코드 게임입니다`,
+          footer: {
+            text: "1/5",
+          },
+        },
+      ],
+      components: [row],
+    };
+    interaction.editReply(embed);
+  } else if (page === "second") {
+    const row = new ActionRowBuilder().addComponents(
+      new ButtonBuilder().setCustomId("first").setLabel("<").setStyle(1),
+      new ButtonBuilder().setCustomId("third").setLabel(">").setStyle(1)
+    );
+    const embed = {
+      content: "",
+      embeds: [
+        {
+          title: `${gameName} start`,
+          description: `게임을 시작하기 위해선 디스코드의 식별아이디 수집이 필요합니다. \`${gameName} start\`를 입력하여 나온 메시지의 약관을 살펴보신 후 동의를 해주시면 게임 계정이 생성되고, \`${gameName} game\`을 통해 게임을 시작하실 수 있습니다.`,
+          footer: {
+            text: "2/5",
+          },
+        },
+      ],
+      components: [row],
+    };
+    interaction.editReply(embed);
+  } else if (page === "third") {
+    const row = new ActionRowBuilder().addComponents(
+      new ButtonBuilder().setCustomId("second").setLabel("<").setStyle(1),
+      new ButtonBuilder().setCustomId("fourth").setLabel(">").setStyle(1)
+    );
+    const embed = {
+      content: "",
+      embeds: [
+        {
+          title: `${gameName} 농장`,
+          description: `씨앗을 심으면 정해진 시간이 지나 싹이 나고, 작물이 되는 곳입니다. 다 자란 작물은 \`전부 수확\` 버튼으로 수확이 가능하고, 선택메뉴를 통해서 농장, 상점, 가방으로 이동할 수 있습니다.`,
+          footer: {
+            text: "3/5",
+          },
+        },
+      ],
+      components: [row],
+    };
+    interaction.editReply(embed);
+  } else if (page === "fourth") {
+    const row = new ActionRowBuilder().addComponents(
+      new ButtonBuilder().setCustomId("third").setLabel("<").setStyle(1),
+      new ButtonBuilder().setCustomId("fifth").setLabel(">").setStyle(1)
+    );
+    const embed = {
+      content: "",
+      embeds: [
+        {
+          title: `${gameName} 상점`,
+          description: `작물의 정보를 보고 씨앗을 구매할 수 있는 곳입니다. 골드가 충분하다면 버튼으로 각 씨앗을 구매할 수 있습니다. 선택메뉴를 통해서 농장, 상점, 가방으로 이동할 수 있습니다.`,
+          footer: {
+            text: "4/5",
+          },
+        },
+      ],
+      components: [row],
+    };
+    interaction.editReply(embed);
+  } else if (page === "fifth") {
+    const row = new ActionRowBuilder().addComponents(
+      new ButtonBuilder().setCustomId("fourth").setLabel("<").setStyle(1),
+      new ButtonBuilder()
+        .setCustomId("disabled")
+        .setLabel(">")
+        .setStyle(1)
+        .setDisabled(true)
+    );
+    const embed = {
+      content: "",
+      embeds: [
+        {
+          title: `${gameName} 가방`,
+          description: `구매한 씨앗을 심고, 수확한 작물을 팔고, 작물을 요리할 수 있는 곳입니다. 씨앗은 농장에 자리가 있어야 심을 수 있고, 작물이 충분하다면 요리하여 ${dishName}를 만들 수 있습니다. 선택메뉴를 통해서 농장, 상점, 가방으로 이동할 수 있습니다.`,
+          footer: {
+            text: "5/5",
+          },
+        },
+      ],
+      components: [row],
+    };
+    interaction.editReply(embed);
   }
 }
-
-module.exports = helpfunction;
+module.exports = endfunction;
