@@ -4,7 +4,7 @@ const {
   StringSelectMenuBuilder,
   StringSelectMenuOptionBuilder,
 } = require("discord.js");
-const { crop1Name, crop2Name } = require("../config");
+const { crop1Name, crop2Name, dishName } = require("../config");
 
 function rowMaker(location) {
   const locationMenuRow = new ActionRowBuilder().addComponents(
@@ -63,7 +63,10 @@ function rowMaker(location) {
         .setCustomId("sell2")
         .setLabel(`sell ${crop2Name}`)
         .setStyle(1),
-      new ButtonBuilder().setCustomId("cook").setLabel("cook dish").setStyle(1)
+      new ButtonBuilder()
+        .setCustomId("cook")
+        .setLabel(`cook ${dishName}`)
+        .setStyle(1)
     );
     return [locationMenuRow, invenButtonRow];
   }

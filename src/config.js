@@ -1,6 +1,7 @@
 require("dotenv").config();
 
 const gameName = "BLY";
+const gameNameLowerCase = "bly";
 
 const crop1Name = "당근";
 const crop1SeedTime = 10;
@@ -14,13 +15,16 @@ const crop2SproutTime = 20;
 const crop2buyingCost = 2;
 const crop2SellingCost = 4;
 
-const dishName = "엘븐 와퍼";
+const dishName = "엘븐와퍼";
+
+const startGold = 100;
 
 module.exports = {
   token: process.env.DISCORD_TOKEN,
   clientId: process.env.CLIENT_ID,
   prefix: "!",
   gameName,
+  gameNameLowerCase,
   crop1Name,
   crop1SeedTime,
   crop1SproutTime,
@@ -32,4 +36,5 @@ module.exports = {
   crop2buyingCost,
   crop2SellingCost,
   dishName,
+  startGold,
 };

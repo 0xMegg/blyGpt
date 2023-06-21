@@ -1,5 +1,6 @@
 const { db } = require("../fbase");
 const { EmbedBuilder, ActionRowBuilder, ButtonBuilder } = require("discord.js");
+const { startGold } = require("../config");
 
 async function startfunction(interaction) {
   const userDoc = db.collection("users").doc(interaction.author.id);
@@ -37,7 +38,7 @@ async function startfunction(interaction) {
         await userDoc.set({
           discordId: interaction.user.id,
           lastLogin: new Date(),
-          gold: 100,
+          gold: startGold,
         });
         await crop1Doc.set({
           type: 0,
