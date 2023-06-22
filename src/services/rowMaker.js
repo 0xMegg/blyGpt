@@ -9,13 +9,25 @@ const { crop1Name, crop2Name, dishName } = require("../config");
 function rowMaker(location) {
   const locationMenuRow = new ActionRowBuilder().addComponents(
     new StringSelectMenuBuilder().setCustomId("location").addOptions(
-      ...["farm", "shop", "inventory"].map((option) => {
+      ...[
+        ["농장", "farm", "작물이 자라고, 수확할 수 있는 곳입니다."],
+        [
+          "상점",
+          "shop",
+          "작물의 특성을 알아보고, 씨앗을 구매할 수 있는 곳입니다.",
+        ],
+        [
+          "가방",
+          "inventory",
+          "씨앗을 심고, 작물을 팔고, 요리를 할 수 있는 곳입니다.",
+        ],
+      ].map((option) => {
         const menu = new StringSelectMenuOptionBuilder()
-          .setLabel(option)
-          .setValue(option)
-          .setDescription(option);
+          .setLabel(option[0])
+          .setValue(option[1])
+          .setDescription(option[2]);
 
-        if (option === location) {
+        if (option[1] === location) {
           menu.setDefault(true);
         }
 
@@ -23,6 +35,7 @@ function rowMaker(location) {
       })
     )
   );
+  const MenuRow = new ActionRowBuilder().addComponents();
 
   if (location === "farm") {
     const farmButtonRow = new ActionRowBuilder().addComponents(

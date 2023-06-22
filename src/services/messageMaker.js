@@ -51,7 +51,7 @@ async function farmMessageMaker(interaction, type, systemMessage) {
 
   const userRef = db.collection("users").doc(user.id);
   const userData = (await userRef.get()).data();
-  const title = `${user.username}'s farm`;
+  const title = `${user.username}의 농장`;
   const content = `💰 ${userData.gold}`;
 
   const attachment = await farmImageMaker(cropDataArray);
@@ -79,12 +79,11 @@ async function farmMessageMaker(interaction, type, systemMessage) {
 
 async function shopMessageMaker(interaction, systemMessage) {
   const imageUrl = shopBaseUrl;
-  console.log(`shopMessageMaker's system message is ${systemMessage}`);
   const user = interaction.user;
   const id = user.id;
   const userRef = db.collection("users").doc(id);
   const userData = (await userRef.get()).data();
-  const title = `${user.username}'s shop`;
+  const title = `${user.username}의 상점`;
   const content = `💰 ${userData.gold}`;
 
   const rows = rowMaker("shop");
@@ -114,7 +113,7 @@ async function inventoryMessageMaker(interaction, systemMessage) {
   const id = user.id;
   const userRef = db.collection("users").doc(id);
   const userData = (await userRef.get()).data();
-  const title = `${user.username}'s inventory`;
+  const title = `${user.username}의 가방`;
   const content = `💰 ${userData.gold}`;
   const seed1Ref = userRef.collection("inventory").doc("seed1");
   const seed1Number = (await seed1Ref.get()).data().number;
