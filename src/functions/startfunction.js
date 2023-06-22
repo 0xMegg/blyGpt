@@ -1,6 +1,6 @@
 const { db } = require("../fbase");
 const { EmbedBuilder, ActionRowBuilder, ButtonBuilder } = require("discord.js");
-const { startGold } = require("../config");
+const { startGold, gameName } = require("../config");
 
 async function startfunction(interaction) {
   const userDoc = db.collection("users").doc(interaction.author.id);
@@ -101,12 +101,10 @@ async function startfunction(interaction) {
 async function startPage(interaction, page) {
   if (page === "first") {
     const embed = new EmbedBuilder()
-      .setTitle("Welcome1")
-      .setDescription("상세설명")
-      .addFields({
-        name: "빌리야에 온걸 환영해",
-        value: "빌리야는 어쩌구 저쩌구",
-      });
+      .setTitle(`${gameName}에 오신것을 환영합니다!`)
+      .setDescription(
+        `${gameName}을 플레이하기 위해선 사용자를 특정할 수 있는 디스코드 아이디의 수집이 필요합니다. 수집된 디스코드 아이디는 사용자를 특정하는 용도 이외에는 어디에도 사용되지 않습니다.`
+      );
     const row = new ActionRowBuilder().addComponents(
       new ButtonBuilder().setCustomId("next").setLabel(">").setStyle(1)
     );

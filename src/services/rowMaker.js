@@ -28,7 +28,7 @@ function rowMaker(location) {
     const farmButtonRow = new ActionRowBuilder().addComponents(
       new ButtonBuilder()
         .setCustomId("harvest")
-        .setLabel("harvest all")
+        .setLabel("전부 수확")
         .setStyle(1),
       new ButtonBuilder().setCustomId("refresh").setLabel("🔄").setStyle(1)
     );
@@ -37,11 +37,11 @@ function rowMaker(location) {
     const shopButtonRow = new ActionRowBuilder().addComponents(
       new ButtonBuilder()
         .setCustomId("seed1")
-        .setLabel(`buy ${crop1Name}`)
+        .setLabel(`${crop1Name} 구매`)
         .setStyle(1),
       new ButtonBuilder()
         .setCustomId("seed2")
-        .setLabel(`buy ${crop2Name}`)
+        .setLabel(`${crop2Name} 구매`)
         .setStyle(1)
     );
     return [locationMenuRow, shopButtonRow];
@@ -49,23 +49,23 @@ function rowMaker(location) {
     const invenButtonRow = new ActionRowBuilder().addComponents(
       new ButtonBuilder()
         .setCustomId("plant1")
-        .setLabel(`plant ${crop1Name}`)
+        .setLabel(`${crop1Name} 심기`)
         .setStyle(1),
       new ButtonBuilder()
         .setCustomId("plant2")
-        .setLabel(`plant ${crop2Name}`)
+        .setLabel(`${crop2Name} 심기`)
         .setStyle(1),
       new ButtonBuilder()
         .setCustomId("sell1")
-        .setLabel(`sell ${crop1Name}`)
+        .setLabel(`${crop1Name} 판매`)
         .setStyle(1),
       new ButtonBuilder()
         .setCustomId("sell2")
-        .setLabel(`sell ${crop2Name}`)
+        .setLabel(`${crop2Name} 판매`)
         .setStyle(1),
       new ButtonBuilder()
         .setCustomId("cook")
-        .setLabel(`cook ${dishName}`)
+        .setLabel(`${dishName} 요리`)
         .setStyle(1)
     );
     return [locationMenuRow, invenButtonRow];

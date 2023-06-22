@@ -68,10 +68,10 @@ client.on("messageCreate", async (interaction) => {
     // const arg = splittedMessages.slice(2);
     if (command === "game") {
       mainfunction(interaction);
-    } else if (command === "start") {
-      startfunction(interaction);
-    } else if (command === "end") {
-      endfunction(interaction);
+      // } else if (command === "start") {
+      //   startfunction(interaction);
+      // } else if (command === "end") {
+      //   endfunction(interaction);
     } else {
       helpfunction(interaction);
     }
