@@ -14,7 +14,6 @@ async function startfunction(interaction) {
     const collector = interaction.channel.createMessageComponentCollector({});
 
     collector.on("collect", async (interaction) => {
-      await interaction.deferUpdate();
       if (interaction.customId === "next") {
         startPage(interaction, "next");
       } else if (interaction.customId === "prev") {
@@ -128,7 +127,7 @@ async function startPage(interaction, page) {
       embeds: [embed],
       components: [row],
     };
-    interaction.editReply(message);
+    interaction.update(message);
   } else if (page === "next") {
     const embed = {
       title: "title",
@@ -148,7 +147,7 @@ async function startPage(interaction, page) {
       embeds: [embed],
       components: [row],
     };
-    interaction.editReply(message);
+    interaction.update(message);
   } else if (page === "agreed") {
     const message = {
       embeds: [
@@ -159,7 +158,7 @@ async function startPage(interaction, page) {
       ],
       components: [],
     };
-    interaction.editReply(message);
+    interaction.update(message);
   }
 }
 

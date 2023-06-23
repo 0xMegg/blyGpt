@@ -4,8 +4,8 @@ async function shopfunction(interaction, messageType, systemMessage) {
   const message = await shopMessageMaker(interaction, systemMessage);
   if (messageType === "send") {
     interaction.channel.send(message);
-  } else if (messageType === "editReply") {
-    interaction.editReply(message);
+  } else if (messageType === "update") {
+    interaction.update(message);
   } else {
     interaction.reply(message);
   }

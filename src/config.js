@@ -17,6 +17,8 @@ const crop2buyingCost = 2;
 const crop2SellingCost = 4;
 
 const dishName = "엘븐와퍼";
+const crop1NeededNumber = 2;
+const crop2NeededNumber = 1;
 
 const startGold = 100;
 
@@ -38,5 +40,7 @@ module.exports = {
   crop2buyingCost,
   crop2SellingCost,
   dishName,
+  crop1NeededNumber,
+  crop2NeededNumber,
   startGold,
 };

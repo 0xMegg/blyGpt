@@ -1,10 +1,4 @@
-const { db } = require("../fbase");
-const {
-  EmbedBuilder,
-  ButtonStyle,
-  ActionRowBuilder,
-  ButtonBuilder,
-} = require("discord.js");
+const { ActionRowBuilder, ButtonBuilder } = require("discord.js");
 const { gameName, dishName, gameNameLowerCase } = require("../config");
 const {
   farmExampleUrl,
@@ -12,12 +6,11 @@ const {
   inventoryExampleUrl,
 } = require("../assets/bases");
 
-async function endfunction(interaction) {
+async function helpfunction(interaction) {
   helpPage(interaction, "main");
   const collector = interaction.channel.createMessageComponentCollector({});
 
   collector.on("collect", async (interaction) => {
-    await interaction.deferUpdate();
     helpPage(interaction, interaction.customId);
   });
 }
@@ -68,7 +61,7 @@ async function helpPage(interaction, page) {
       ],
       components: [row],
     };
-    interaction.editReply(embed);
+    interaction.update(embed);
   } else if (page === "second") {
     const row = new ActionRowBuilder().addComponents(
       new ButtonBuilder().setCustomId("first").setLabel("<").setStyle(1),
@@ -87,7 +80,7 @@ async function helpPage(interaction, page) {
       ],
       components: [row],
     };
-    interaction.editReply(embed);
+    interaction.update(embed);
   } else if (page === "third") {
     const row = new ActionRowBuilder().addComponents(
       new ButtonBuilder().setCustomId("second").setLabel("<").setStyle(1),
@@ -108,7 +101,7 @@ async function helpPage(interaction, page) {
       ],
       components: [row],
     };
-    interaction.editReply(embed);
+    interaction.update(embed);
   } else if (page === "fourth") {
     const row = new ActionRowBuilder().addComponents(
       new ButtonBuilder().setCustomId("third").setLabel("<").setStyle(1),
@@ -129,7 +122,7 @@ async function helpPage(interaction, page) {
       ],
       components: [row],
     };
-    interaction.editReply(embed);
+    interaction.update(embed);
   } else if (page === "fifth") {
     const row = new ActionRowBuilder().addComponents(
       new ButtonBuilder().setCustomId("fourth").setLabel("<").setStyle(1),
@@ -150,7 +143,7 @@ async function helpPage(interaction, page) {
       ],
       components: [row],
     };
-    interaction.editReply(embed);
+    interaction.update(embed);
   } else if (page === "sixth") {
     const row = new ActionRowBuilder().addComponents(
       new ButtonBuilder().setCustomId("fifth").setLabel("<").setStyle(1),
@@ -175,7 +168,7 @@ async function helpPage(interaction, page) {
       ],
       components: [row],
     };
-    interaction.editReply(embed);
+    interaction.update(embed);
   }
 }
-module.exports = endfunction;
+module.exports = helpfunction;

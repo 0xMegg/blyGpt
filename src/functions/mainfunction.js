@@ -100,14 +100,13 @@ async function mainfunction(interaction) {
   const collector = interaction.channel.createMessageComponentCollector({});
 
   collector.on("collect", async (interaction) => {
-    await interaction.deferUpdate();
     if (interaction.customId === "location") {
       if (interaction.values[0] === "farm") {
         farmfunction(interaction, "refresh");
       } else if (interaction.values[0] === "shop") {
-        shopfunction(interaction, "editReply");
+        shopfunction(interaction, "update");
       } else if (interaction.values[0] === "inventory") {
-        invenfunction(interaction, "editReply");
+        invenfunction(interaction, "update");
       }
     } else if (interaction.customId === "seed1") {
       let systemMessage;
@@ -131,7 +130,7 @@ async function mainfunction(interaction) {
         console.log("-----after-----");
         console.log(newUserData.gold);
       }
-      shopfunction(interaction, "editReply", systemMessage);
+      shopfunction(interaction, "update", systemMessage);
     } else if (interaction.customId === "seed2") {
       let systemMessage;
       const userRef = db.collection("users").doc(interaction.user.id);
@@ -154,7 +153,7 @@ async function mainfunction(interaction) {
         console.log("-----after-----");
         console.log(newUserData.gold);
       }
-      shopfunction(interaction, "editReply", systemMessage);
+      shopfunction(interaction, "update", systemMessage);
     } else if (interaction.customId === "refresh") {
       farmfunction(interaction, "refresh");
     } else if (interaction.customId === "harvest") {
@@ -263,7 +262,7 @@ async function mainfunction(interaction) {
             createdAt: new Date(),
           });
           systemMessage = `${getTime()} 1번 자리에 ${crop1Name}을 심으셨습니다`;
-          invenfunction(interaction, "editReply", systemMessage);
+          invenfunction(interaction, "update", systemMessage);
         } else if (crop2Type === 0) {
           seed1Ref.update({
             number: seed1Number - 1,
@@ -273,7 +272,7 @@ async function mainfunction(interaction) {
             createdAt: new Date(),
           });
           systemMessage = `${getTime()} 2번 자리에 ${crop1Name}을 심으셨습니다`;
-          invenfunction(interaction, "editReply", systemMessage);
+          invenfunction(interaction, "update", systemMessage);
         } else if (crop3Type === 0) {
           seed1Ref.update({
             number: seed1Number - 1,
@@ -283,7 +282,7 @@ async function mainfunction(interaction) {
             createdAt: new Date(),
           });
           systemMessage = `${getTime()} 3번 자리에 ${crop1Name}을 심으셨습니다`;
-          invenfunction(interaction, "editReply", systemMessage);
+          invenfunction(interaction, "update", systemMessage);
         } else if (crop4Type === 0) {
           seed1Ref.update({
             number: seed1Number - 1,
@@ -293,7 +292,7 @@ async function mainfunction(interaction) {
             createdAt: new Date(),
           });
           systemMessage = `${getTime()} 4번 자리에 ${crop1Name}을 심으셨습니다`;
-          invenfunction(interaction, "editReply", systemMessage);
+          invenfunction(interaction, "update", systemMessage);
         } else if (crop5Type === 0) {
           seed1Ref.update({
             number: seed1Number - 1,
@@ -303,7 +302,7 @@ async function mainfunction(interaction) {
             createdAt: new Date(),
           });
           systemMessage = `${getTime()} 5번 자리에 ${crop1Name}을 심으셨습니다`;
-          invenfunction(interaction, "editReply", systemMessage);
+          invenfunction(interaction, "update", systemMessage);
         } else if (crop6Type === 0) {
           seed1Ref.update({
             number: seed1Number - 1,
@@ -313,7 +312,7 @@ async function mainfunction(interaction) {
             createdAt: new Date(),
           });
           systemMessage = `${getTime()} 6번 자리에 ${crop1Name}을 심으셨습니다`;
-          invenfunction(interaction, "editReply", systemMessage);
+          invenfunction(interaction, "update", systemMessage);
         } else if (crop7Type === 0) {
           seed1Ref.update({
             number: seed1Number - 1,
@@ -323,7 +322,7 @@ async function mainfunction(interaction) {
             createdAt: new Date(),
           });
           systemMessage = `${getTime()} 7번 자리에 ${crop1Name}을 심으셨습니다`;
-          invenfunction(interaction, "editReply", systemMessage);
+          invenfunction(interaction, "update", systemMessage);
         } else if (crop8Type === 0) {
           seed1Ref.update({
             number: seed1Number - 1,
@@ -333,7 +332,7 @@ async function mainfunction(interaction) {
             createdAt: new Date(),
           });
           systemMessage = `${getTime()} 8번 자리에 ${crop1Name}을 심으셨습니다`;
-          invenfunction(interaction, "editReply", systemMessage);
+          invenfunction(interaction, "update", systemMessage);
         } else if (crop9Type === 0) {
           seed1Ref.update({
             number: seed1Number - 1,
@@ -343,14 +342,14 @@ async function mainfunction(interaction) {
             createdAt: new Date(),
           });
           systemMessage = `${getTime()} 9번 자리에 ${crop1Name}을 심으셨습니다`;
-          invenfunction(interaction, "editReply", systemMessage);
+          invenfunction(interaction, "update", systemMessage);
         } else {
           systemMessage = "밭에 씨앗을 심을 장소가 없어요!";
-          invenfunction(interaction, "editReply", systemMessage);
+          invenfunction(interaction, "update", systemMessage);
         }
       } else {
         systemMessage = "심을 씨앗이 없어요 :(";
-        invenfunction(interaction, "editReply", systemMessage);
+        invenfunction(interaction, "update", systemMessage);
       }
     } else if (interaction.customId === "plant2") {
       let systemMessage;
@@ -385,7 +384,7 @@ async function mainfunction(interaction) {
             createdAt: new Date(),
           });
           systemMessage = `${getTime()} 1번 자리에 ${crop2Name}을 심으셨습니다`;
-          invenfunction(interaction, "editReply", systemMessage);
+          invenfunction(interaction, "update", systemMessage);
         } else if (crop2Type === 0) {
           seed2Ref.update({
             number: seed2Number - 1,
@@ -395,7 +394,7 @@ async function mainfunction(interaction) {
             createdAt: new Date(),
           });
           systemMessage = `${getTime()} 2번 자리에 ${crop2Name}을 심으셨습니다`;
-          invenfunction(interaction, "editReply", systemMessage);
+          invenfunction(interaction, "update", systemMessage);
         } else if (crop3Type === 0) {
           seed2Ref.update({
             number: seed2Number - 1,
@@ -405,7 +404,7 @@ async function mainfunction(interaction) {
             createdAt: new Date(),
           });
           systemMessage = `${getTime()} 3번 자리에 ${crop2Name}을 심으셨습니다`;
-          invenfunction(interaction, "editReply", systemMessage);
+          invenfunction(interaction, "update", systemMessage);
         } else if (crop4Type === 0) {
           seed2Ref.update({
             number: seed2Number - 1,
@@ -415,7 +414,7 @@ async function mainfunction(interaction) {
             createdAt: new Date(),
           });
           systemMessage = `${getTime()} 4번 자리에 ${crop2Name}을 심으셨습니다`;
-          invenfunction(interaction, "editReply", systemMessage);
+          invenfunction(interaction, "update", systemMessage);
         } else if (crop5Type === 0) {
           seed2Ref.update({
             number: seed2Number - 1,
@@ -425,7 +424,7 @@ async function mainfunction(interaction) {
             createdAt: new Date(),
           });
           systemMessage = `${getTime()} 5번 자리에 ${crop2Name}을 심으셨습니다`;
-          invenfunction(interaction, "editReply", systemMessage);
+          invenfunction(interaction, "update", systemMessage);
         } else if (crop6Type === 0) {
           seed2Ref.update({
             number: seed2Number - 1,
@@ -435,7 +434,7 @@ async function mainfunction(interaction) {
             createdAt: new Date(),
           });
           systemMessage = `${getTime()} 6번 자리에 ${crop2Name}을 심으셨습니다`;
-          invenfunction(interaction, "editReply", systemMessage);
+          invenfunction(interaction, "update", systemMessage);
         } else if (crop7Type === 0) {
           seed2Ref.update({
             number: seed2Number - 1,
@@ -445,7 +444,7 @@ async function mainfunction(interaction) {
             createdAt: new Date(),
           });
           systemMessage = `${getTime()} 7번 자리에 ${crop2Name}을 심으셨습니다`;
-          invenfunction(interaction, "editReply", systemMessage);
+          invenfunction(interaction, "update", systemMessage);
         } else if (crop8Type === 0) {
           seed2Ref.update({
             number: seed2Number - 1,
@@ -455,7 +454,7 @@ async function mainfunction(interaction) {
             createdAt: new Date(),
           });
           systemMessage = `${getTime()} 8번 자리에 ${crop2Name}을 심으셨습니다`;
-          invenfunction(interaction, "editReply", systemMessage);
+          invenfunction(interaction, "update", systemMessage);
         } else if (crop9Type === 0) {
           seed2Ref.update({
             number: seed2Number - 1,
@@ -465,14 +464,14 @@ async function mainfunction(interaction) {
             createdAt: new Date(),
           });
           systemMessage = `${getTime()} 9번 자리에 ${crop2Name}을 심으셨습니다`;
-          invenfunction(interaction, "editReply", systemMessage);
+          invenfunction(interaction, "update", systemMessage);
         } else {
           systemMessage = "밭에 씨앗을 심을 장소가 없어요!";
-          invenfunction(interaction, "editReply", systemMessage);
+          invenfunction(interaction, "update", systemMessage);
         }
       } else {
         systemMessage = "심을 씨앗이 없어요 :(";
-        invenfunction(interaction, "editReply", systemMessage);
+        invenfunction(interaction, "update", systemMessage);
       }
     } else if (interaction.customId === "sell1") {
       sellCrop(interaction, "harvested1");

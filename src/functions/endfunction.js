@@ -1,10 +1,5 @@
 const { db } = require("../fbase");
-const {
-  EmbedBuilder,
-  ButtonStyle,
-  ActionRowBuilder,
-  ButtonBuilder,
-} = require("discord.js");
+const { ActionRowBuilder, ButtonBuilder } = require("discord.js");
 const { gameName } = require("../config");
 
 async function endfunction(interaction) {
@@ -19,7 +14,6 @@ async function endfunction(interaction) {
     const collector = interaction.channel.createMessageComponentCollector({});
 
     collector.on("collect", async (interaction) => {
-      await interaction.deferUpdate();
       if (interaction.customId === "end") {
         endPage(interaction, "second");
       }
@@ -54,7 +48,7 @@ async function endPage(interaction, page) {
       ],
       components: [],
     };
-    interaction.editReply(embed);
+    interaction.update(embed);
     const userDoc = db.collection("users").doc(interaction.user.id);
     userDoc.delete();
   }

@@ -5,8 +5,8 @@ async function invenfunction(interaction, messageType, systemMessage) {
   const message = await inventoryMessageMaker(interaction, systemMessage);
   if (messageType === "send") {
     interaction.channel.send(message);
-  } else if (messageType === "editReply") {
-    interaction.editReply(message, systemMessage);
+  } else if (messageType === "update") {
+    interaction.update(message, systemMessage);
   } else {
     interaction.reply(message);
   }

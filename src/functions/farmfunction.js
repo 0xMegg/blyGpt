@@ -6,7 +6,7 @@ async function farmfunction(interaction, type, systemMessage) {
     interaction.reply(message);
   } else if (type === "refresh") {
     const message = await farmMessageMaker(interaction, type, systemMessage);
-    interaction.editReply(message);
+    interaction.update(message);
   }
 }
 module.exports = farmfunction;
