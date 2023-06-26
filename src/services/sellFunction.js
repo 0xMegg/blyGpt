@@ -31,7 +31,7 @@ async function sellCrop(interaction, cropType) {
       systemMessage = `${getTime()} ${crop2SellingCost}${currencyName}를 받고 ${crop2Name}을 팔았습니다`;
     }
   } else {
-    systemMessage = `${getTime} 팔 수 있는 작물이 없습니다 :(`;
+    systemMessage = `${getTime()} 팔 수 있는 작물이 없습니다 :(`;
   }
   invenfunction(interaction, "update", systemMessage);
 }

@@ -113,11 +113,9 @@ async function mainfunction(interaction) {
       const userRef = db.collection("users").doc(interaction.user.id);
       const userData = (await userRef.get()).data();
       const userGold = userData.gold;
-      if (userGold < 1) {
-        console.log("not enough gold");
+      if (userGold < crop1buyingCost) {
+        systemMessage = `${getTime()} ${currencyName}가 부족합니다.`;
       } else {
-        console.log("-----before-----");
-        console.log(userGold);
         userRef.update({ gold: userGold - 1 });
         const seed1Ref = userRef.collection("inventory").doc("seed1");
         const seedNumber = (await seed1Ref.get()).data().number;
@@ -125,10 +123,6 @@ async function mainfunction(interaction) {
           number: seedNumber + 1,
         });
         systemMessage = `${getTime()} ${crop1buyingCost}${currencyName}로 ${crop1Name}을 구매하셨습니다`;
-        const newUserRef = db.collection("users").doc(interaction.user.id);
-        const newUserData = (await newUserRef.get()).data();
-        console.log("-----after-----");
-        console.log(newUserData.gold);
       }
       shopfunction(interaction, "update", systemMessage);
     } else if (interaction.customId === "seed2") {
@@ -136,11 +130,9 @@ async function mainfunction(interaction) {
       const userRef = db.collection("users").doc(interaction.user.id);
       const userData = (await userRef.get()).data();
       const userGold = userData.gold;
-      if (userGold < 2) {
-        console.log("not enough gold");
+      if (userGold < crop2buyingCost) {
+        systemMessage = `${getTime()} ${currencyName}가 부족합니다.`;
       } else {
-        console.log("-----before-----");
-        console.log(userGold);
         userRef.update({ gold: userGold - 2 });
         const seed2Ref = userRef.collection("inventory").doc("seed2");
         const seedNumber = (await seed2Ref.get()).data().number;
@@ -148,10 +140,6 @@ async function mainfunction(interaction) {
           number: seedNumber + 1,
         });
         systemMessage = `${getTime()} ${crop2buyingCost}${currencyName}로 ${crop2Name}을 구매하셨습니다`;
-        const newUserRef = db.collection("users").doc(interaction.user.id);
-        const newUserData = (await newUserRef.get()).data();
-        console.log("-----after-----");
-        console.log(newUserData.gold);
       }
       shopfunction(interaction, "update", systemMessage);
     } else if (interaction.customId === "refresh") {
@@ -183,7 +171,7 @@ async function mainfunction(interaction) {
           const time = new Date().getTime() / 1000 - data.createdAt._seconds;
           if (data.type === 1) {
             if (time > crop1SproutTime) {
-              console.log(`${cropName} / ${data.type} / ${time} / ready`);
+              // console.log(`${cropName} / ${data.type} / ${time} / ready`);
               collection.update({ type: 0 });
               const harvested1Ref = db
                 .collection("users")
@@ -194,12 +182,13 @@ async function mainfunction(interaction) {
                 .number;
               harvested1Ref.update({ number: harvested1Number + 1 });
               harvestedCrop1Number++;
-            } else {
-              console.log(`${cropName} / ${data.type} / ${time} / not ready`);
             }
+            // else {
+            //   console.log(`${cropName} / ${data.type} / ${time} / not ready`);
+            // }
           } else if (data.type === 2) {
             if (time > crop2SproutTime) {
-              console.log(`${cropName} / ${data.type} / ${time} / ready`);
+              // console.log(`${cropName} / ${data.type} / ${time} / ready`);
               collection.update({ type: 0 });
               const harvested2Ref = db
                 .collection("users")
@@ -210,9 +199,10 @@ async function mainfunction(interaction) {
                 .number;
               harvested2Ref.update({ number: harvested2Number + 1 });
               harvestedCrop2Number++;
-            } else {
-              console.log(`${cropName} / ${data.type} / ${time} / not ready`);
             }
+            // else {
+            //   console.log(`${cropName} / ${data.type} / ${time} / not ready`);
+            // }
           }
         }
       }
@@ -225,9 +215,9 @@ async function mainfunction(interaction) {
       } else {
         systemMessage = `${getTime()} 수확할게 없어요 :(`;
       }
-      console.log(
-        `${harvestedCrop1Number}, ${harvestedCrop2Number}, ${systemMessage}`
-      );
+      // console.log(
+      //   `${harvestedCrop1Number}, ${harvestedCrop2Number}, ${systemMessage}`
+      // );
       farmfunction(interaction, "refresh", systemMessage);
     } else if (interaction.customId === "plant1") {
       let systemMessage;
@@ -344,11 +334,11 @@ async function mainfunction(interaction) {
           systemMessage = `${getTime()} 9번 자리에 ${crop1Name}을 심으셨습니다`;
           invenfunction(interaction, "update", systemMessage);
         } else {
-          systemMessage = "밭에 씨앗을 심을 장소가 없어요!";
+          systemMessage = `${getTime()} 밭에 씨앗을 심을 장소가 없어요!`;
           invenfunction(interaction, "update", systemMessage);
         }
       } else {
-        systemMessage = "심을 씨앗이 없어요 :(";
+        systemMessage = `${getTime()} 심을 씨앗이 없어요 :(`;
         invenfunction(interaction, "update", systemMessage);
       }
     } else if (interaction.customId === "plant2") {
@@ -466,11 +456,11 @@ async function mainfunction(interaction) {
           systemMessage = `${getTime()} 9번 자리에 ${crop2Name}을 심으셨습니다`;
           invenfunction(interaction, "update", systemMessage);
         } else {
-          systemMessage = "밭에 씨앗을 심을 장소가 없어요!";
+          systemMessage = `${getTime()} 밭에 씨앗을 심을 장소가 없어요!`;
           invenfunction(interaction, "update", systemMessage);
         }
       } else {
-        systemMessage = "심을 씨앗이 없어요 :(";
+        systemMessage = `${getTime()} 심을 씨앗이 없어요 :(`;
         invenfunction(interaction, "update", systemMessage);
       }
     } else if (interaction.customId === "sell1") {

@@ -47,7 +47,7 @@ async function farmMessageMaker(interaction, type, systemMessage) {
       });
     }
   }
-  console.log(cropDataArray);
+  // console.log(cropDataArray);
 
   const userRef = db.collection("users").doc(user.id);
   const userData = (await userRef.get()).data();
